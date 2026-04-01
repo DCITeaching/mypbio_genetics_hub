@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 Genetics Hub — DCI MYP Biology</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   ROOT & RESET
+══════════════════════════════════════════════ */
+:root {
+  --navy:#0D1B2E; --navy2:#1B3A6B; --navy3:#243F7A;
+  --teal:#0B9E8E; --teal2:#07C5B2; --teal-lt:#E0FAF7; --teal-xlt:#F0FDFB;
+  --gold:#E9A61A; --gold2:#F5C842; --gold-lt:#FFF8E0;
+  --green:#1A6B3C; --green-lt:#E6F4EA;
+  --red:#B91C1C; --red-lt:#FFF0F0;
+  --purple:#6344C8; --purple-lt:#EDE7F6;
+  --slate:#94A3B8; --slate-dk:#64748B;
+  --ink:#0F1B2D; --muted:#6B7280; --border:#E2E8F0;
+  --bg:#F8FAFC; --card:#FFFFFF;
+  --shadow:0 2px 20px rgba(13,27,46,.08);
+  --shadow-lg:0 8px 40px rgba(13,27,46,.14);
+  --correct:#166534; --correct-lt:#DCFCE7;
+  --wrong:#991B1B; --wrong-lt:#FEE2E2;
+  --radius:14px; --radius-sm:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
+button{font-family:'Outfit',sans-serif;cursor:pointer}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ══════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+══════════════════════════════════════════════ */
+.ann-bar{background:linear-gradient(90deg,var(--navy2),var(--navy3));color:#fff;padding:9px 20px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:13.5px;font-weight:500;position:relative;z-index:200}
+.ann-bar .countdown{background:var(--gold);color:var(--navy);font-weight:700;padding:3px 10px;border-radius:20px;font-size:13px;font-family:'JetBrains Mono',monospace}
+.ann-bar .pulse{width:8px;height:8px;border-radius:50%;background:var(--teal2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
+
+/* ══════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════ */
+.hero{background:var(--navy);min-height:340px;position:relative;overflow:hidden;display:flex;align-items:center;padding:48px 24px}
+.hero-dna{position:absolute;right:-40px;top:50%;transform:translateY(-50%);opacity:.07;font-size:400px;line-height:1;user-select:none;pointer-events:none}
+.hero-geo{position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 80% at 85% 50%,rgba(11,158,142,.18),transparent),
+  radial-gradient(ellipse 40% 60% at 5% 80%,rgba(233,166,26,.1),transparent),
+  radial-gradient(ellipse 30% 40% at 50% 0%,rgba(27,58,107,.8),transparent);
+  pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal2);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--teal2)}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(32px,5vw,58px);font-weight:400;color:#fff;line-height:1.05;margin-bottom:16px}
+.hero h1 strong{color:var(--gold2);font-weight:400;font-style:italic}
+.hero-desc{font-size:16px;color:#94B8D4;max-width:580px;line-height:1.65;margin-bottom:32px}
+.hero-stats{display:flex;gap:20px;flex-wrap:wrap}
+.stat-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 18px;text-align:center}
+.stat-chip .sv{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;color:var(--teal2);display:block}
+.stat-chip .sl{font-size:12px;color:#8BAACC;text-transform:uppercase;letter-spacing:.5px}
+
+/* ══════════════════════════════════════════════
+   PROGRESS DASHBOARD
+══════════════════════════════════════════════ */
+.progress-dash{background:#fff;border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(13,27,46,.06)}
+.pd-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pd-label{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap}
+.pd-bar-wrap{flex:1;min-width:200px;height:8px;background:#E2E8F0;border-radius:99px;overflow:hidden}
+.pd-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--teal2));transition:width .6s ease;width:0%}
+.pd-pct{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--teal);white-space:nowrap}
+.pd-reset{font-size:12px;color:var(--muted);background:none;border:none;padding:0;text-decoration:underline}
+
+/* ══════════════════════════════════════════════
+   TAB NAVIGATION
+══════════════════════════════════════════════ */
+.tab-nav{background:#fff;border-bottom:2px solid var(--border);position:sticky;top:57px;z-index:99;overflow-x:auto}
+.tab-nav-inner{max-width:900px;margin:0 auto;display:flex;padding:0 24px}
+.tab-btn{padding:14px 20px;border:none;background:none;font-size:14px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:7px}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal)}
+.tab-btn .badge{font-size:11px;background:var(--teal-lt);color:var(--teal);padding:1px 7px;border-radius:99px;font-family:'JetBrains Mono',monospace}
+.tab-btn.active .badge{background:var(--teal);color:#fff}
+
+/* ══════════════════════════════════════════════
+   MAIN LAYOUT
+══════════════════════════════════════════════ */
+.main{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* ══════════════════════════════════════════════
+   SHARED COMPONENTS
+══════════════════════════════════════════════ */
+.panel-header{margin-bottom:28px}
+.panel-header h2{font-family:'Instrument Serif',serif;font-size:30px;font-weight:400;color:var(--navy2);margin-bottom:6px}
+.panel-header p{font-size:15px;color:var(--muted);line-height:1.6}
+.panel-header .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:block}
+
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.card h3{font-family:'Instrument Serif',serif;font-size:20px;color:var(--navy2);margin-bottom:10px}
+.card p{font-size:14.5px;color:#374151;line-height:1.75;margin-bottom:12px}
+.card p:last-child{margin-bottom:0}
+
+.key{font-weight:600;color:var(--teal);background:var(--teal-xlt);padding:1px 6px;border-radius:4px;font-size:.95em}
+.callout{background:var(--teal-lt);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:14px;color:var(--ink)}
+.callout strong{display:block;color:var(--teal);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-family:'JetBrains Mono',monospace;margin-bottom:5px}
+.callout.warn{background:#FFF8E0;border-color:var(--gold);color:#5C3D00}
+.callout.warn strong{color:#8A5C00}
+.callout.danger{background:var(--red-lt);border-color:var(--red)}
+.callout.danger strong{color:var(--red)}
+
+.section-divider{display:flex;align-items:center;gap:12px;margin:32px 0 20px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.section-divider::before,.section-divider::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* ══════════════════════════════════════════════
+   LEARN TAB — CONCEPT CARDS
+══════════════════════════════════════════════ */
+.concept-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.cn-btn{padding:8px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--muted);transition:all .15s}
+.cn-btn:hover{border-color:var(--teal);color:var(--teal)}
+.cn-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.concept-panel{display:none}.concept-panel.active{display:block}
+
+.reading-block{background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow)}
+.rb-header{padding:20px 24px 18px;display:flex;align-items:center;gap:12px}
+.rb-num{width:36px;height:36px;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rb-title{font-family:'Instrument Serif',serif;font-size:19px;color:var(--navy2)}
+.rb-sub{font-size:12px;color:var(--muted)}
+.rb-body{padding:0 24px 24px}
+.rb-body p{font-size:14.5px;line-height:1.75;color:#374151;margin-bottom:12px}
+.rb-body p:last-child{margin-bottom:0}
+
+.c1 .rb-header{background:linear-gradient(135deg,var(--navy2),var(--navy3))}
+.c1 .rb-num{background:rgba(255,255,255,.15);color:#fff}
+.c1 .rb-title,.c1 .rb-sub{color:#fff;opacity:.9}
+.c2 .rb-header{background:linear-gradient(135deg,var(--teal),#0a8880)}
+.c2 .rb-num{background:rgba(255,255,255,.2);color:#fff}
+.c2 .rb-title,.c2 .rb-sub{color:#fff}
+.c3 .rb-header{background:linear-gradient(135deg,var(--purple),#4f35b0)}
+.c3 .rb-num{background:rgba(255,255,255,.2);color:#fff}
+.c3 .rb-title,.c3 .rb-sub{color:#fff}
+.c4 .rb-header{background:linear-gradient(135deg,#B84F00,#cc5800)}
+.c4 .rb-num{background:rgba(255,255,255,.2);color:#fff}
+.c4 .rb-title,.c4 .rb-sub{color:#fff}
+
+/* vocab pills row */
+.vocab-strip{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.vp{font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid;cursor:pointer;transition:all .15s;background:#fff;user-select:none}
+.vp.c1{border-color:#ADC2E5;color:var(--navy2)}.vp.c1:hover{background:var(--navy2);color:#fff}
+.vp.c2{border-color:#9DDADA;color:var(--teal)}.vp.c2:hover{background:var(--teal);color:#fff}
+.vp.c3{border-color:#C3ADEE;color:var(--purple)}.vp.c3:hover{background:var(--purple);color:#fff}
+.vp.c4{border-color:#F0B987;color:#B84F00}.vp.c4:hover{background:#B84F00;color:#fff}
+.vp.popped{transform:scale(.95);opacity:.7}
+
+/* vocab tooltip */
+.vtooltip{position:fixed;background:var(--navy);color:#fff;border-radius:10px;padding:12px 16px;font-size:13px;max-width:280px;z-index:999;pointer-events:none;opacity:0;transition:opacity .2s;box-shadow:var(--shadow-lg);line-height:1.5}
+.vtooltip.show{opacity:1}
+.vtooltip strong{display:block;color:var(--teal2);margin-bottom:4px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+
+/* ══════════════════════════════════════════════
+   PRACTICE TAB — MCQ + PUNNETT
+══════════════════════════════════════════════ */
+.mcq-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.mcq-meta{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.mcq-tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.mcq-tag.L1{background:#DCFCE7;color:var(--correct)}
+.mcq-tag.L2{background:#FEF3C7;color:#92400E}
+.mcq-tag.L3{background:#FEE2E2;color:var(--wrong)}
+.mcq-diff{font-size:12px;color:var(--muted)}
+.mcq-q{font-size:15px;font-weight:600;color:var(--ink);line-height:1.55;margin-bottom:18px}
+.mcq-opts{display:flex;flex-direction:column;gap:8px}
+.mcq-opt{padding:12px 16px;border-radius:10px;border:2px solid var(--border);background:#fff;font-size:14px;display:flex;align-items:flex-start;gap:10px;text-align:left;transition:all .15s;width:100%}
+.mcq-opt:hover:not(.locked){border-color:var(--teal);background:var(--teal-xlt)}
+.mcq-opt .ol{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--muted);flex-shrink:0;margin-top:2px;min-width:18px}
+.mcq-opt.correct{border-color:var(--correct);background:var(--correct-lt)}.mcq-opt.correct .ol{color:var(--correct)}
+.mcq-opt.wrong{border-color:var(--wrong);background:var(--wrong-lt)}.mcq-opt.wrong .ol{color:var(--wrong)}
+.mcq-opt.locked{cursor:default}
+.mcq-fb{display:none;margin-top:14px;padding:14px 16px;border-radius:10px;font-size:14px;line-height:1.6}
+.mcq-fb.show{display:block}
+.mcq-fb.correct{background:var(--correct-lt);border:1px solid #86EFAC;color:var(--correct)}
+.mcq-fb.wrong{background:var(--wrong-lt);border:1px solid #FCA5A5;color:var(--wrong)}
+.fb-head{font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+
+/* score tracker */
+.score-strip{background:linear-gradient(135deg,var(--navy2),var(--navy3));border-radius:var(--radius);padding:20px 24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.score-strip h4{font-family:'Instrument Serif',serif;font-size:18px}
+.score-strip p{font-size:13px;color:#94B8D4;margin-top:2px}
+.score-nums{display:flex;gap:20px}
+.sn{text-align:center}
+.sn .sv{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;color:var(--teal2);display:block}
+.sn .sl{font-size:11px;color:#8BAACC;text-transform:uppercase;letter-spacing:.5px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.f-btn{padding:6px 14px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--muted);transition:all .15s}
+.f-btn:hover{border-color:var(--teal);color:var(--teal)}
+.f-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* punnett simulator */
+.punnet-demo{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.punnet-demo h4{font-family:'Instrument Serif',serif;font-size:19px;color:var(--navy2);margin-bottom:6px}
+.punnet-demo p{font-size:14px;color:var(--muted);margin-bottom:18px}
+.pc-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:20px}
+.pc-row label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.pc-row select{padding:9px 14px;border:2px solid var(--border);border-radius:8px;font-size:14px;font-family:'Outfit',sans-serif;background:#fff;color:var(--ink)}
+.pc-row select:focus{outline:none;border-color:var(--teal)}
+.run-btn{padding:10px 22px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;transition:background .15s}
+.run-btn:hover{background:var(--teal2);color:var(--navy)}
+.pgrid{display:grid;grid-template-columns:60px 1fr 1fr;gap:4px;max-width:240px;margin-bottom:20px}
+.pgc{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:600}
+.pgh{background:var(--navy2);color:#fff;font-size:15px}.pgc0{background:transparent}
+.pgr{background:var(--teal-lt);color:var(--teal);transition:all .3s}
+@keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.r-box{background:var(--teal-xlt);border-radius:10px;padding:16px;border:1px solid #B2E8E2}
+.r-box h5{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:10px}
+.r-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:14px}
+.r-row:last-child{border-bottom:none}
+.r-row .rl{color:var(--muted)}.r-row .rv{font-weight:600;color:var(--teal)}
+
+/* ══════════════════════════════════════════════
+   BUILD TAB — STUDY GUIDE GENERATOR
+══════════════════════════════════════════════ */
+.sg-container{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:640px){.sg-container{grid-template-columns:1fr}}
+.sg-input-panel{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow)}
+.sg-input-panel h4{font-family:'Instrument Serif',serif;font-size:19px;color:var(--navy2);margin-bottom:6px}
+.sg-input-panel p{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+.sg-section{margin-bottom:20px}
+.sg-section label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.sg-section textarea{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-size:14px;font-family:'Outfit',sans-serif;resize:vertical;min-height:80px;transition:border-color .15s;color:var(--ink)}
+.sg-section textarea:focus{outline:none;border-color:var(--teal)}
+.sg-section textarea::placeholder{color:#B0BAC4}
+.sg-section input[type=text]{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--ink)}
+.sg-section input:focus{outline:none;border-color:var(--teal)}
+.gen-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--navy);border:none;border-radius:10px;font-size:15px;font-weight:700;margin-top:8px;transition:all .2s}
+.gen-btn:hover{filter:brightness(1.08);box-shadow:0 4px 16px rgba(11,158,142,.3)}
+.sg-preview{background:#fff;border-radius:var(--radius);border:2px solid var(--border);padding:24px;box-shadow:var(--shadow);position:relative;min-height:400px}
+.sg-preview h4{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.copy-btn{font-size:12px;background:var(--teal);color:#fff;padding:4px 12px;border-radius:99px;border:none;font-family:'Outfit',sans-serif;font-weight:600}
+.sg-output{font-size:13.5px;line-height:1.75;color:var(--ink)}
+.sg-output .sg-h1{font-family:'Instrument Serif',serif;font-size:22px;color:var(--navy2);border-bottom:2px solid var(--teal);padding-bottom:6px;margin-bottom:14px}
+.sg-output .sg-h2{font-size:14px;font-weight:700;color:var(--teal);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px;font-family:'JetBrains Mono',monospace}
+.sg-output .sg-body{margin-bottom:8px;color:#374151}
+.sg-output .sg-blank{display:inline-block;border-bottom:2px solid var(--teal);min-width:60px;height:18px;margin:0 4px}
+.sg-output .sg-empty{color:#C0CDD6;font-style:italic;font-size:13px;text-align:center;padding:40px 0}
+.sg-output .sg-term{font-weight:700;color:var(--navy2)}
+.sg-output .sg-def{color:#374151}
+.print-btn{width:100%;margin-top:16px;padding:10px;border:2px solid var(--teal);color:var(--teal);background:#fff;border-radius:10px;font-size:14px;font-weight:600;transition:all .15s}
+.print-btn:hover{background:var(--teal);color:#fff}
+
+/* ══════════════════════════════════════════════
+   CHECK TAB — MASTERY TRACKER
+══════════════════════════════════════════════ */
+.checklist-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
+.checklist-card h4{font-family:'Instrument Serif',serif;font-size:18px;color:var(--navy2);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.checklist-card h4 .tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.5px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #F1F5F9;cursor:pointer;transition:background .1s;border-radius:8px;padding-left:4px}
+.check-item:last-child{border-bottom:none}
+.check-item:hover{background:#F8FAFC}
+.ci-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s}
+.ci-box.checked{background:var(--teal);border-color:var(--teal)}
+.ci-box.checked::after{content:"✓";color:#fff;font-size:13px;font-weight:700}
+.ci-text{font-size:14px;color:#374151;line-height:1.5}
+.ci-text.done{text-decoration:line-through;color:var(--muted)}
+.ci-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-family:'JetBrains Mono',monospace;font-weight:600;margin-left:6px;flex-shrink:0}
+.ci-badge.A{background:#EBF0FA;color:var(--navy2)}
+.ci-badge.B{background:#E0F4F4;color:var(--teal)}
+.ci-badge.C{background:#EDE7F6;color:var(--purple)}
+.ci-badge.D{background:#FFF0E5;color:#B84F00}
+
+/* reflection */
+.reflect-card{background:linear-gradient(135deg,var(--navy2),var(--navy3));border-radius:var(--radius);padding:28px;color:#fff;margin-bottom:20px}
+.reflect-card h4{font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:16px;color:var(--gold2)}
+.reflect-q{background:rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.reflect-q p{font-size:14px;color:#C8DCF4;margin-bottom:10px}
+.reflect-q textarea{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;font-family:'Outfit',sans-serif;font-size:13.5px;padding:10px 12px;resize:vertical;min-height:60px}
+.reflect-q textarea::placeholder{color:rgba(255,255,255,.35)}
+.reflect-q textarea:focus{outline:none;border-color:var(--teal2)}
+.save-reflect{padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:14px;font-weight:700;margin-top:8px}
+
+/* mastery rings */
+.mastery-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:600px){.mastery-row{grid-template-columns:repeat(2,1fr)}}
+.mastery-ring{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.ring-svg{width:72px;height:72px;margin:0 auto 10px}
+.ring-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.ring-pct{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--teal)}
+
+/* ══════════════════════════════════════════════
+   SUPPORT TAB
+══════════════════════════════════════════════ */
+.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:640px){.support-grid{grid-template-columns:1fr}}
+.support-card{border-radius:var(--radius);padding:20px;border:1px solid var(--border)}
+.support-card h4{font-family:'Instrument Serif',serif;font-size:17px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.support-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.support-card li{font-size:14px;color:#374151;padding-left:18px;position:relative;line-height:1.5}
+.support-card li::before{content:"→";position:absolute;left:0;color:var(--teal);font-weight:700}
+.sc-esl{background:linear-gradient(135deg,#EBF8FF,#DBEAFE)}
+.sc-esl h4{color:#1E40AF}
+.sc-iep{background:linear-gradient(135deg,var(--green-lt),#DCFCE7)}
+.sc-iep h4{color:var(--green)}
+.sc-strat{background:linear-gradient(135deg,var(--gold-lt),#FEF9C3)}
+.sc-strat h4{color:#78350F}
+.sc-prac{background:linear-gradient(135deg,var(--purple-lt),#EDE9FE)}
+.sc-prac h4{color:var(--purple)}
+
+.resource-links{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.resource-links h4{font-family:'Instrument Serif',serif;font-size:19px;color:var(--navy2);margin-bottom:16px}
+.rl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.rl-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);text-decoration:none;transition:all .15s}
+.rl-item:hover{border-color:var(--teal);background:var(--teal-xlt);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,158,142,.1)}
+.rl-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.rl-text .rt{font-size:13.5px;font-weight:600;color:var(--ink);display:block;margin-bottom:2px}
+.rl-text .rs{font-size:12px;color:var(--muted)}
+.rl-tag{font-size:11px;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:4px;display:inline-block}
+.rl-tag.free{background:var(--correct-lt);color:var(--correct)}
+.rl-tag.vid{background:#EDE7F6;color:var(--purple)}
+.rl-tag.inter{background:var(--teal-lt);color:var(--teal)}
+
+.standards-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.standards-table th{background:var(--navy2);color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+.standards-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.standards-table tr:nth-child(even) td{background:#F8FAFC}
+.std-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-right:4px}
+.std-ngss{background:#EBF8FF;color:#1E40AF}
+.std-myp{background:var(--teal-lt);color:var(--teal)}
+
+/* ══════════════════════════════════════════════
+   FLASHCARD HUB
+══════════════════════════════════════════════ */
+.fc-modes{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.fc-mode-btn{padding:7px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--muted);transition:all .15s}
+.fc-mode-btn:hover{border-color:var(--teal);color:var(--teal)}
+.fc-mode-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.fc-stats{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.fc-stat{font-size:13px;padding:6px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.fc-stat.total{background:var(--navy-lt,#EBF0FA);color:var(--navy2)}
+.fc-stat.known{background:var(--correct-lt);color:var(--correct)}
+.fc-stat.left{background:#FEF3C7;color:#92400E}
+.fc-dots{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.fc-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:background .3s}
+.fc-dot.k{background:var(--correct)}.fc-dot.s{background:var(--gold)}
+.flashcard{perspective:1000px;height:210px;cursor:pointer;margin-bottom:14px}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center}
+.fc-front{background:linear-gradient(135deg,var(--navy2),var(--navy3));color:#fff;box-shadow:var(--shadow-lg)}
+.fc-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal2);margin-bottom:12px}
+.fc-lesson{font-size:11px;background:rgba(255,255,255,.1);border-radius:99px;padding:3px 10px;margin-bottom:10px;color:rgba(255,255,255,.7);font-family:'JetBrains Mono',monospace}
+.fc-term{font-family:'Instrument Serif',serif;font-size:28px;font-weight:400;color:#fff;line-height:1.2}
+.fc-hint-txt{font-size:12px;color:rgba(255,255,255,.45);margin-top:10px}
+.fc-back{background:#fff;border:2px solid var(--border);transform:rotateY(180deg);box-shadow:var(--shadow)}
+.fc-def{font-size:15px;color:var(--ink);line-height:1.65}
+.fc-ex{font-size:12.5px;color:var(--muted);margin-top:10px;font-style:italic}
+.fc-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.fc-btn{padding:10px 28px;border-radius:10px;border:none;font-size:14px;font-weight:700;transition:all .15s}
+.fc-btn.got{background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--navy)}
+.fc-btn.got:hover{filter:brightness(1.08)}
+.fc-btn.again{background:#FEF3C7;color:#78350F;border:1px solid #FCD34D}
+.fc-ct{text-align:center;font-size:13px;color:var(--muted);margin-top:10px}
+.fc-done-card{background:linear-gradient(135deg,var(--navy2),var(--navy3));border-radius:var(--radius);padding:40px;text-align:center;color:#fff;display:none}
+.fc-done-card h3{font-family:'Instrument Serif',serif;font-size:28px;color:var(--gold2);margin-bottom:10px}
+.fc-done-card p{color:#94B8D4;margin-bottom:20px}
+.fc-done-card button{padding:12px 32px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;font-size:15px;font-weight:700}
+
+/* ══════════════════════════════════════════════
+   UTILITIES + RESPONSIVE
+══════════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeUp .4s ease both}
+.navy-lt{background:#EBF0FA}
+@media(max-width:600px){.hero{padding:32px 16px}.tab-btn{padding:12px 14px;font-size:13px}.main{padding:24px 16px 60px}}
+@media print{.ann-bar,.progress-dash,.tab-nav{display:none!important}.tab-panel{display:block!important}.main{padding:0}}
+</style>
+</head>
+<body>
+
+<!-- TOOLTIP -->
+<div class="vtooltip" id="tooltip"><strong id="tt-term"></strong><span id="tt-def"></span></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="ann-bar">
+  <div class="pulse"></div>
+  <span>Unit 5 Genetics · DCI MYP Biology</span>
+  <div class="countdown" id="countdown">April 8 Assessment</div>
+  <span id="days-msg">loading countdown...</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-geo"></div>
+  <div class="hero-dna">🧬</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Student Study Hub</div>
+    <h1>Unit 5: <strong>Genetics</strong><br>& Heredity</h1>
+    <p class="hero-desc">Everything you need to master this unit — readings, practice questions, study guide builder, mastery checklist, and support resources. All in one place.</p>
+    <div class="hero-stats">
+      <div class="stat-chip"><span class="sv">4</span><span class="sl">Lessons</span></div>
+      <div class="stat-chip"><span class="sv">60+</span><span class="sl">Practice Qs</span></div>
+      <div class="stat-chip"><span class="sv">70</span><span class="sl">Flashcards</span></div>
+      <div class="stat-chip"><span class="sv" id="days-hero">—</span><span class="sl">Days to Test</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS DASHBOARD -->
+<div class="progress-dash">
+  <div class="pd-inner">
+    <span class="pd-label">Overall Progress</span>
+    <div class="pd-bar-wrap"><div class="pd-bar" id="global-bar"></div></div>
+    <span class="pd-pct" id="global-pct">0%</span>
+    <button class="pd-reset" onclick="resetAll()">Reset</button>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('learn',this)">📖 Learn <span class="badge">4 concepts</span></button>
+    <button class="tab-btn" onclick="switchTab('practice',this)">✅ Practice <span class="badge">MCQ + Punnett</span></button>
+    <button class="tab-btn" onclick="switchTab('flashcards',this)">🃏 Flashcards <span class="badge">70 cards</span></button>
+    <button class="tab-btn" onclick="switchTab('build',this)">✏️ Build <span class="badge">Study guide</span></button>
+    <button class="tab-btn" onclick="switchTab('check',this)">🎯 Checklist <span class="badge">Track mastery</span></button>
+    <button class="tab-btn" onclick="switchTab('support',this)">🌐 Support <span class="badge">ESL · IEP</span></button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════
+     LEARN TAB
+══════════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-learn">
+  <div class="panel-header">
+    <span class="tag">Step 1 — Read & Understand</span>
+    <h2>Concept Reading Cards</h2>
+    <p>Select a lesson below. Click on any <span style="background:var(--teal-xlt);color:var(--teal);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px">term</span> pill to see its definition instantly. Use these readings to complete your student handouts.</p>
+  </div>
+
+  <div class="concept-nav">
+    <button class="cn-btn active" onclick="showConcept(1,this)">🧬 L1: Mendel's Laws</button>
+    <button class="cn-btn" onclick="showConcept(2,this)">🩸 L2: Complex Patterns</button>
+    <button class="cn-btn" onclick="showConcept(3,this)">🧪 L3: Mutations & Pedigrees</button>
+    <button class="cn-btn" onclick="showConcept(4,this)">⚗️ L4: Genetic Engineering</button>
+  </div>
+
+  <!-- CONCEPT 1 -->
+  <div class="concept-panel c1 active" id="cp1">
+    <div class="reading-block c1">
+      <div class="rb-header">
+        <div class="rb-num">1</div>
+        <div><div class="rb-title">Gregor Mendel & The Rules of Inheritance</div><div class="rb-sub">Foundation — Lesson 1</div></div>
+      </div>
+      <div class="rb-body">
+        <p>In the 1850s, an Austrian monk named Gregor Mendel crossed pea plants in his monastery garden, tracking traits across thousands of plants. He developed three laws still foundational to genetics today. Pea plants were ideal: they self-pollinate, produce many offspring quickly, and have clear either-or traits (round vs. wrinkled, purple vs. white).</p>
+        <div class="callout"><strong>The Three Laws</strong>Law of Dominance: dominant allele masks recessive when present. Law of Segregation: allele pairs separate during meiosis — each gamete gets ONE allele. Law of Independent Assortment: genes on different chromosomes sort independently into gametes.</div>
+        <p>An <strong>allele</strong> is one version of a gene. Each individual carries two alleles per gene — one from each parent. If both alleles are the same, the individual is <em>homozygous</em> (RR or rr). If different, they are <em>heterozygous</em> (Rr). The allele combination an organism carries is its <em>genotype</em>; what you observe is its <em>phenotype</em>.</p>
+        <p><strong>Key insight:</strong> BB and Bb have the same phenotype (both show dominant trait) but different genotypes. Two heterozygous parents (Bb × Bb) have a 25% chance of producing a recessive child (bb) — even though neither parent shows the recessive trait.</p>
+        <div class="vocab-strip" id="vs1"></div>
+      </div>
+    </div>
+    <div class="reading-block c1">
+      <div class="rb-header">
+        <div class="rb-num">1b</div>
+        <div><div class="rb-title">Punnett Squares — Predicting Offspring</div><div class="rb-sub">Monohybrid (2×2) and Dihybrid (4×4)</div></div>
+      </div>
+      <div class="rb-body">
+        <p>A <strong>Punnett square</strong> is a grid tool for predicting offspring genotype and phenotype probabilities. For a <em>monohybrid cross</em> (one trait), use a 2×2 grid. For a <em>dihybrid cross</em> (two traits), use a 4×4 grid.</p>
+        <p><strong>Monohybrid steps:</strong> (1) Assign letters — uppercase for dominant, lowercase for recessive. (2) Write parent genotypes. (3) Split into gametes (each gamete gets ONE allele). (4) Fill the grid. (5) Calculate genotypic ratio (actual allele combos) and phenotypic ratio (what you see). Classic Rr × Rr gives 3 dominant : 1 recessive phenotype ratio.</p>
+        <p><strong>Dihybrid FOIL method:</strong> For parent TtRr, use FOIL to get all 4 gametes: TR, Tr, tR, tr. Build a 4×4 grid (16 boxes). The classic TtRr × TtRr result is 9:3:3:1 phenotypic ratio.</p>
+        <div class="vocab-strip" id="vs1b"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 2 -->
+  <div class="concept-panel c2" id="cp2">
+    <div class="reading-block c2">
+      <div class="rb-header">
+        <div class="rb-num">2</div>
+        <div><div class="rb-title">Beyond Simple Dominance</div><div class="rb-sub">Incomplete Dominance, Codominance, Multiple Alleles — Lesson 2</div></div>
+      </div>
+      <div class="rb-body">
+        <p>Most real traits don't follow simple dominant/recessive rules. <strong>Incomplete dominance</strong>: neither allele fully dominates — the heterozygote shows a blended phenotype. Example: red (RR) × white (R'R') snapdragons → ALL pink (RR') offspring. Crossing RR' × RR' gives 1 Red : 2 Pink : 1 White.</p>
+        <p><strong>Codominance</strong>: both alleles are fully and simultaneously expressed — both phenotypes appear at once, no blending. Example: brown horse × white horse → appaloosa (brown spots ON white coat). Blood type AB is the key human example.</p>
+        <div class="callout warn"><strong>Critical Distinction</strong>Incomplete dominance → NEW blended phenotype (pink). Codominance → BOTH original phenotypes visible at the same time (brown AND white). Never confuse these two!</div>
+        <p><strong>Multiple alleles</strong>: more than 2 allele versions exist in the population for one gene (each individual still only has 2). ABO blood type has three alleles: A, B, and i. A and B are codominant with each other; both are dominant over i. Blood type O (ii) is actually the MOST COMMON blood type worldwide — being recessive does NOT mean being rare.</p>
+        <div class="vocab-strip" id="vs2"></div>
+      </div>
+    </div>
+    <div class="reading-block c2">
+      <div class="rb-header">
+        <div class="rb-num">2b</div>
+        <div><div class="rb-title">Sex-Linked Traits & Polygenic Inheritance</div><div class="rb-sub">X-linked genes and continuous variation</div></div>
+      </div>
+      <div class="rb-body">
+        <p>Humans have 22 pairs of <strong>autosomes</strong> and 1 pair of sex chromosomes (XX = female; XY = male). <strong>X-linked traits</strong> are encoded on the X chromosome. Since males only have ONE X chromosome, any recessive allele on their X is automatically expressed — there is no second X to carry a masking dominant allele. This is why X-linked recessive traits (color blindness, hemophilia) affect males far more often than females.</p>
+        <p>Notation: write alleles as superscripts on X. Carrier female = X<sup>B</sup>X<sup>b</sup> (unaffected but can pass to sons). Affected male = X<sup>b</sup>Y. Affected fathers CANNOT pass X-linked traits to sons — sons get the Y chromosome from dad.</p>
+        <p><strong>Polygenic inheritance</strong>: a trait controlled by two or more genes, producing a continuous spectrum of phenotypes (bell curve). Examples: skin color, height, eye color. <strong>Linked genes</strong>: genes on the same chromosome tend to be inherited together, violating independent assortment (can only be separated by crossing over).</p>
+        <div class="vocab-strip" id="vs2b"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 3 -->
+  <div class="concept-panel c3" id="cp3">
+    <div class="reading-block c3">
+      <div class="rb-header">
+        <div class="rb-num">3</div>
+        <div><div class="rb-title">Mutations — When DNA Changes</div><div class="rb-sub">Gene mutations, chromosome mutations, somatic vs. germ line — Lesson 3</div></div>
+      </div>
+      <div class="rb-body">
+        <p>A <strong>mutation</strong> is any permanent change in the DNA sequence. Mutations can be caused by replication errors, mutagens (UV light, radiation, cigarette smoke), or viruses. Not all mutations are harmful — many are neutral, and beneficial mutations are the engine of evolution.</p>
+        <div class="callout"><strong>Where Does the Mutation Happen?</strong>Somatic (body) cell mutations → affect only that individual; can cause cancer; CANNOT be inherited by offspring. Germ line (gamete-producing cell) mutations → can be inherited; every cell of the next generation carries it. This is how heritable disorders arise.</div>
+        <p><strong>Gene mutations:</strong> Point mutation — ONE nucleotide substituted (may be silent, change one amino acid, or create early stop). Frameshift — insertion or deletion of nucleotides shifts the entire reading frame downstream. Frameshifts are usually MORE damaging than point mutations because every codon after the mutation is altered.</p>
+        <p><strong>Chromosome mutations:</strong> Nondisjunction — chromosomes fail to separate in meiosis → wrong chromosome number in gametes → offspring with trisomy (e.g., Trisomy 21 = Down syndrome). Translocation — a segment moves to a different chromosome.</p>
+        <div class="vocab-strip" id="vs3"></div>
+      </div>
+    </div>
+    <div class="reading-block c3">
+      <div class="rb-header">
+        <div class="rb-num">3b</div>
+        <div><div class="rb-title">Pedigrees — Reading Family Trees</div><div class="rb-sub">Symbols, patterns, and what they mean</div></div>
+      </div>
+      <div class="rb-body">
+        <p>A <strong>pedigree</strong> traces a trait's inheritance across family generations. Squares = males; circles = females. Filled = affected; unfilled = unaffected; half-filled = carrier (sex-linked). Horizontal lines connect mates; vertical lines drop to offspring.</p>
+        <p><strong>Autosomal Recessive:</strong> Trait skips generations; both sexes equally affected; two unaffected parents can have an affected child (both are carriers). Examples: cystic fibrosis, sickle cell.</p>
+        <p><strong>Autosomal Dominant:</strong> Appears every generation; both sexes equally affected; unaffected individuals NEVER have affected children. Examples: Huntington's, achondroplasia.</p>
+        <p><strong>X-linked Recessive:</strong> Far more males affected; trait skips generations through carrier females; affected father's sons are UNAFFECTED (sons get Y from dad, not his X). Examples: hemophilia, color blindness.</p>
+        <div class="callout danger"><strong>Key Diagnostic Clue</strong>If an affected father's sons are all unaffected → X-linked (sons can't inherit dad's X-linked allele). This is the strongest single clue for X-linked inheritance.</div>
+        <div class="vocab-strip" id="vs3b"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 4 -->
+  <div class="concept-panel c4" id="cp4">
+    <div class="reading-block c4">
+      <div class="rb-header">
+        <div class="rb-num">4</div>
+        <div><div class="rb-title">The Molecular Toolkit</div><div class="rb-sub">Genetic Engineering — Lesson 4</div></div>
+      </div>
+      <div class="rb-body">
+        <p><strong>Genetic engineering</strong>: deliberately modifying an organism's DNA using biotechnology tools. <strong>Restriction enzymes</strong> are molecular scissors — they cut DNA at specific short sequences (recognition sites), creating sticky ends. <strong>DNA ligase</strong> is the glue — it joins fragments at their sticky ends. Together, restriction enzymes + ligase create <strong>recombinant DNA</strong> (DNA from two or more sources combined).</p>
+        <p><strong>PCR</strong> (Polymerase Chain Reaction): amplifies tiny DNA samples into millions of copies. Used in forensics, COVID testing, paternity testing. <strong>Gel electrophoresis</strong>: separates DNA by SIZE using electric current. Small fragments travel FARTHER. Produces banding patterns used for DNA fingerprinting. Always run a ladder (known sizes) alongside samples.</p>
+        <p><strong>CRISPR-Cas9</strong>: the most precise gene-editing tool today. A guide RNA directs Cas9 to cut at a specific sequence; the cell's repair machinery can then delete, correct, or insert sequences. Works in virtually any organism.</p>
+        <div class="vocab-strip" id="vs4"></div>
+      </div>
+    </div>
+    <div class="reading-block c4">
+      <div class="rb-header">
+        <div class="rb-num">4b</div>
+        <div><div class="rb-title">Applications & Bioethics</div><div class="rb-sub">Real-world impact and Criterion D thinking</div></div>
+      </div>
+      <div class="rb-body">
+        <p><strong>Bacterial transformation:</strong> human gene inserted into bacteria → bacteria produce human protein. Classic example: insulin (human insulin gene in bacteria since 1982). <strong>GMO crops:</strong> Bt corn (bacterial toxin gene reduces pesticide use), Golden Rice (beta-carotene for Vitamin A). <strong>Gene therapy:</strong> correct/replace mutated gene in a patient's own body cells (somatic — NOT inherited). Used for sickle cell, hemophilia, inherited blindness.</p>
+        <p><strong>DNA fingerprinting:</strong> PCR + gel electrophoresis → unique banding profile per individual. Used in forensics, paternity testing, evolutionary comparison. Accuracy: 1 in billions.</p>
+        <div class="callout warn"><strong>Somatic vs. Germline Editing</strong>Somatic = affects one patient only; NOT inherited. Germline = affects embryo; ALL future descendants carry the change. Germline editing is ethically controversial and mostly banned. The He Jiankui case (2018 CRISPR babies) was globally condemned — the scientist went to prison.</div>
+        <p><strong>Criterion D requires you to EVALUATE</strong> — not just describe. Distinguish therapeutic editing (cure disease) from enhancement editing (select traits). Consider consent, heritability, access/inequality, and who should decide.</p>
+        <div class="vocab-strip" id="vs4b"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PRACTICE TAB
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-practice">
+  <div class="panel-header">
+    <span class="tag">Step 2 — Apply Your Knowledge</span>
+    <h2>Practice Questions</h2>
+    <p>Questions span all four lessons, tagged by lesson and difficulty. Click any answer to see detailed feedback. Track your score as you go.</p>
+  </div>
+
+  <div class="score-strip">
+    <div>
+      <h4>Your Practice Score</h4>
+      <p>Questions answered update in real time</p>
+    </div>
+    <div class="score-nums">
+      <div class="sn"><span class="sv" id="sc-correct">0</span><span class="sl">Correct</span></div>
+      <div class="sn"><span class="sv" id="sc-total">0</span><span class="sl">Answered</span></div>
+      <div class="sn"><span class="sv" id="sc-pct">—</span><span class="sl">Score</span></div>
+    </div>
+  </div>
+
+  <div class="filter-row">
+    <button class="f-btn active" onclick="filterQ('all',this)">All Questions</button>
+    <button class="f-btn" onclick="filterQ('L1',this)">L1: Mendel</button>
+    <button class="f-btn" onclick="filterQ('L2',this)">L2: Complex</button>
+    <button class="f-btn" onclick="filterQ('L3',this)">L3: Mutations</button>
+    <button class="f-btn" onclick="filterQ('L4',this)">L4: Biotech</button>
+  </div>
+
+  <div id="mcq-bank"></div>
+
+  <div class="section-divider">Interactive Tools</div>
+
+  <div class="punnet-demo">
+    <h4>🔬 Punnett Square Simulator</h4>
+    <p>Select parent genotypes, click Run, and the simulator fills in the grid and calculates all ratios automatically.</p>
+    <div class="pc-row">
+      <div><label>Parent 1</label>
+        <select id="p1"><option value="RR">RR — Homozygous Dominant</option><option value="Rr" selected>Rr — Heterozygous</option><option value="rr">rr — Homozygous Recessive</option></select>
+      </div>
+      <div><label>Parent 2</label>
+        <select id="p2"><option value="RR">RR — Homozygous Dominant</option><option value="Rr">Rr — Heterozygous</option><option value="rr" selected>rr — Homozygous Recessive</option></select>
+      </div>
+      <button class="run-btn" onclick="runMono()">Run Cross ▶</button>
+    </div>
+    <div class="pgrid" id="pgrid">
+      <div class="pgc pgc0"></div><div class="pgc pgh" id="ph1">?</div><div class="pgc pgh" id="ph2">?</div>
+      <div class="pgc pgh" id="ps1">?</div><div class="pgc pgr" id="pr1">–</div><div class="pgc pgr" id="pr2">–</div>
+      <div class="pgc pgh" id="ps2">?</div><div class="pgc pgr" id="pr3">–</div><div class="pgc pgr" id="pr4">–</div>
+    </div>
+    <div class="r-box" id="pres" style="display:none">
+      <h5>Results</h5>
+      <div class="r-row"><span class="rl">Genotypic Ratio</span><span class="rv" id="res-geno">—</span></div>
+      <div class="r-row"><span class="rl">Phenotypic Ratio</span><span class="rv" id="res-pheno">—</span></div>
+      <div class="r-row"><span class="rl">% Dominant phenotype</span><span class="rv" id="res-dom">—</span></div>
+      <div class="r-row"><span class="rl">% Recessive phenotype</span><span class="rv" id="res-rec">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FLASHCARDS TAB
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-flashcards">
+  <div class="panel-header">
+    <span class="tag">Step 3 — Memorize the Language</span>
+    <h2>Vocabulary Flashcards</h2>
+    <p>70 terms across all four lessons. Filter by lesson or work through the whole deck. "Got It" removes the card; "Again" keeps it in rotation.</p>
+  </div>
+
+  <div class="fc-modes">
+    <button class="fc-mode-btn active" onclick="filterFC('all',this)">All 70 Terms</button>
+    <button class="fc-mode-btn" onclick="filterFC('L1',this)">L1: Mendel</button>
+    <button class="fc-mode-btn" onclick="filterFC('L2',this)">L2: Complex</button>
+    <button class="fc-mode-btn" onclick="filterFC('L3',this)">L3: Mutations</button>
+    <button class="fc-mode-btn" onclick="filterFC('L4',this)">L4: Biotech</button>
+  </div>
+
+  <div class="fc-stats">
+    <div class="fc-stat total" id="fc-total-stat">70 cards</div>
+    <div class="fc-stat known" id="fc-known-stat">0 mastered</div>
+    <div class="fc-stat left" id="fc-left-stat">70 remaining</div>
+  </div>
+
+  <div class="fc-dots" id="fc-dots"></div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:14px;text-align:center">👆 Click the card to flip and see the definition</p>
+
+  <div class="flashcard" id="fc" onclick="flipFC()">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-lbl">Vocabulary Term</div>
+        <div class="fc-lesson" id="fc-lesson">—</div>
+        <div class="fc-term" id="fc-t">Loading...</div>
+        <div class="fc-hint-txt">tap to flip</div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-def" id="fc-d"></div>
+        <div class="fc-ex" id="fc-e"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-ct" id="fc-ct"></div>
+  <div class="fc-actions">
+    <button class="fc-btn again" onclick="markFC(false)">🔄 Review Again</button>
+    <button class="fc-btn got" onclick="markFC(true)">✅ Got It!</button>
+  </div>
+
+  <div class="fc-done-card" id="fc-done">
+    <h3>🎉 Deck Complete!</h3>
+    <p id="fc-done-msg"></p>
+    <button onclick="restartFC()">🔄 Restart This Deck</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BUILD TAB
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-build">
+  <div class="panel-header">
+    <span class="tag">Step 4 — Create Your Study Guide</span>
+    <h2>Study Guide Builder</h2>
+    <p>Fill in the fields on the left. Your formatted study guide appears live on the right. Copy it to a Google Doc, or print it directly from this page.</p>
+  </div>
+
+  <div class="sg-container">
+    <div class="sg-input-panel">
+      <h4>📝 Your Input</h4>
+      <p>Fill in as much or as little as you want — incomplete sections show as blanks to fill in later.</p>
+
+      <div class="sg-section">
+        <label>Your Name</label>
+        <input type="text" id="sg-name" placeholder="Your name here..." oninput="renderSG()">
+      </div>
+      <div class="sg-section">
+        <label>Statement of Inquiry (in your own words)</label>
+        <textarea id="sg-soi" placeholder="The patterns by which traits are inherited reflect..." oninput="renderSG()"></textarea>
+      </div>
+      <div class="sg-section">
+        <label>Lesson 1 — Key Ideas (Mendel's Laws)</label>
+        <textarea id="sg-l1" placeholder="Write the 3 laws in your own words. What is a Punnett square? What is genotype vs. phenotype?" oninput="renderSG()"></textarea>
+      </div>
+      <div class="sg-section">
+        <label>Lesson 2 — Key Ideas (Complex Patterns)</label>
+        <textarea id="sg-l2" placeholder="Explain incomplete dominance vs. codominance. How does blood type work? What are sex-linked traits?" oninput="renderSG()"></textarea>
+      </div>
+      <div class="sg-section">
+        <label>Lesson 3 — Key Ideas (Mutations & Pedigrees)</label>
+        <textarea id="sg-l3" placeholder="What types of mutations exist? How do you identify an inheritance pattern from a pedigree?" oninput="renderSG()"></textarea>
+      </div>
+      <div class="sg-section">
+        <label>Lesson 4 — Key Ideas (Genetic Engineering)</label>
+        <textarea id="sg-l4" placeholder="What tools do genetic engineers use? Name two real-world applications. What is the ethical debate around germline editing?" oninput="renderSG()"></textarea>
+      </div>
+      <div class="sg-section">
+        <label>5 Terms I Need to Review</label>
+        <textarea id="sg-terms" placeholder="allele: ...\nphenotype: ...\ncodominance: ..." oninput="renderSG()"></textarea>
+      </div>
+      <div class="sg-section">
+        <label>Questions I Still Have</label>
+        <textarea id="sg-q" placeholder="I'm still confused about..." oninput="renderSG()"></textarea>
+      </div>
+      <button class="gen-btn" onclick="renderSG()">✨ Generate Study Guide</button>
+    </div>
+
+    <div>
+      <div class="sg-preview">
+        <h4>STUDY GUIDE PREVIEW <button class="copy-btn" onclick="copySG()">Copy Text</button></h4>
+        <div class="sg-output" id="sg-output">
+          <div class="sg-empty">Fill in the fields on the left to see your study guide appear here...</div>
+        </div>
+      </div>
+      <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     CHECKLIST TAB
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-check">
+  <div class="panel-header">
+    <span class="tag">Step 5 — Track Your Mastery</span>
+    <h2>Mastery Checklist & Reflection</h2>
+    <p>Check off each skill as you master it. Your progress is saved automatically. The mastery rings update in real time.</p>
+  </div>
+
+  <div class="mastery-row" id="mastery-rings"></div>
+
+  <div id="checklist-container"></div>
+
+  <div class="reflect-card">
+    <h4>🪞 Self-Reflection</h4>
+    <div class="reflect-q">
+      <p>What is ONE concept from this unit that you feel confident about? Why?</p>
+      <textarea id="r1" placeholder="I feel confident about..." oninput="saveReflect()"></textarea>
+    </div>
+    <div class="reflect-q">
+      <p>What is ONE concept you still find confusing or need more practice with?</p>
+      <textarea id="r2" placeholder="I'm still working on..." oninput="saveReflect()"></textarea>
+    </div>
+    <div class="reflect-q">
+      <p>What study strategy has worked best for you in this unit? (flashcards, re-reading, practice problems, teaching a friend?)</p>
+      <textarea id="r3" placeholder="What's working for me is..." oninput="saveReflect()"></textarea>
+    </div>
+    <div class="reflect-q">
+      <p>On a scale of 1–10, how prepared do you feel for April 8? What would move you one number higher?</p>
+      <textarea id="r4" placeholder="I feel a ___ out of 10. To improve, I will..." oninput="saveReflect()"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SUPPORT TAB
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-support">
+  <div class="panel-header">
+    <span class="tag">Resources, Standards & Accommodations</span>
+    <h2>Support Center</h2>
+    <p>Tools for ESL and IEP students, curated external resources, and standards alignment. Every student can succeed in this unit.</p>
+  </div>
+
+  <div class="support-grid">
+    <div class="support-card sc-esl">
+      <h4>🌍 For ESL / ELL Students</h4>
+      <ul>
+        <li>Use the vocab pill tooltips in the Learn tab — hover or tap any term for instant definition</li>
+        <li>All flashcards include a plain-language example sentence — use it to connect the term to something real</li>
+        <li>The study guide builder helps you write in your own words — that's the most important skill</li>
+        <li>Key terms to master first: allele, genotype, phenotype, dominant, recessive, mutation, pedigree</li>
+        <li>Try teaching one concept to a partner in your home language, then translate back — bilingual encoding strengthens memory</li>
+        <li>Google Translate works well for definitions — but write your final answers in English using the term correctly</li>
+        <li>Sentence starters available: "This allele is dominant because…" / "The pedigree shows X-linked inheritance because…"</li>
+      </ul>
+    </div>
+    <div class="support-card sc-iep">
+      <h4>🎯 For IEP / 504 Students</h4>
+      <ul>
+        <li>The checklist tab shows exactly which skills are tested — focus your energy on checked items first</li>
+        <li>Use the Punnett simulator (Practice tab) to check your work — compare your grid to the simulator's output</li>
+        <li>On pedigrees: use the 4-step process in the Lesson 3 reading — do step 1 (sex ratio) before anything else</li>
+        <li>For written responses: use the MYP command terms in the Standards section below</li>
+        <li>Extended time accommodations apply to the April 8 assessment — speak to your teacher about logistics</li>
+        <li>You are allowed a reference card during the assessment — know which terms are on it</li>
+        <li>Focus first on Lessons 1 and 3 — they carry the most weight in the assessment</li>
+      </ul>
+    </div>
+    <div class="support-card sc-strat">
+      <h4>📚 Study Strategies That Work</h4>
+      <ul>
+        <li><strong>Spaced repetition:</strong> do flashcards for 10 min daily — not 70 min the night before</li>
+        <li><strong>Practice testing:</strong> close notes and try a practice question BEFORE checking the answer</li>
+        <li><strong>Teach-back:</strong> explain a concept out loud to a friend, family member, or your own reflection</li>
+        <li><strong>Error analysis:</strong> when you get a practice question wrong, write WHY in the margin</li>
+        <li><strong>Punnett practice:</strong> redo Rr × Rr and TtRr × TtRr from scratch without looking — 5 min/day</li>
+        <li><strong>Concept mapping:</strong> draw how Lessons 1–4 connect — mutations → pedigrees → inheritance patterns</li>
+      </ul>
+    </div>
+    <div class="support-card sc-prac">
+      <h4>✏️ MYP Command Terms</h4>
+      <ul>
+        <li><strong>Identify</strong> — name or recognize something (no explanation required)</li>
+        <li><strong>Explain</strong> — give reasons with detail and mechanism ("because...")</li>
+        <li><strong>Predict</strong> — use Punnett logic to state an expected outcome with probability</li>
+        <li><strong>Determine</strong> — find the answer by calculation or reasoning from evidence</li>
+        <li><strong>Evaluate</strong> — make a judgment AND defend it with evidence, multiple perspectives</li>
+        <li><strong>Analyze</strong> — break down a pedigree, data set, or scenario into components and discuss relationships</li>
+        <li><strong>Justify</strong> — give reasons/evidence that defend a conclusion</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="resource-links">
+    <h4>🔗 Curated External Resources</h4>
+    <div class="rl-grid">
+      <a class="rl-item" href="https://learn.genetics.utah.edu/content/basics/traits/" target="_blank">
+        <div class="rl-icon">🧬</div>
+        <div class="rl-text"><span class="rt">Learn.Genetics — Utah</span><span class="rs">Interactive inheritance basics, animated</span><span class="rl-tag inter">Interactive</span></div>
+      </a>
+      <a class="rl-item" href="https://www.youtube.com/watch?v=NWqgZUnJdAY" target="_blank">
+        <div class="rl-icon">📺</div>
+        <div class="rl-text"><span class="rt">Amoeba Sisters — Mendelian Genetics</span><span class="rs">Clear animated video, great for review</span><span class="rl-tag vid">Video</span></div>
+      </a>
+      <a class="rl-item" href="https://www.youtube.com/watch?v=8mi4p_KSQto" target="_blank">
+        <div class="rl-icon">📺</div>
+        <div class="rl-text"><span class="rt">Amoeba Sisters — Non-Mendelian</span><span class="rs">Blood type, incomplete dominance, codominance</span><span class="rl-tag vid">Video</span></div>
+      </a>
+      <a class="rl-item" href="https://www.biointeractive.org/classroom-resources/genetics" target="_blank">
+        <div class="rl-icon">🏫</div>
+        <div class="rl-text"><span class="rt">HHMI BioInteractive</span><span class="rs">Free genetics activities and simulations</span><span class="rl-tag free">Free</span></div>
+      </a>
+      <a class="rl-item" href="https://www.youtube.com/watch?v=GhHOjC4oxh8" target="_blank">
+        <div class="rl-icon">📺</div>
+        <div class="rl-text"><span class="rt">Amoeba Sisters — Mutations</span><span class="rs">Point, frameshift, chromosomal explained visually</span><span class="rl-tag vid">Video</span></div>
+      </a>
+      <a class="rl-item" href="https://www.youtube.com/watch?v=v4_A9HsZlms" target="_blank">
+        <div class="rl-icon">📺</div>
+        <div class="rl-text"><span class="rt">Amoeba Sisters — Pedigrees</span><span class="rs">How to read and analyze pedigree charts</span><span class="rl-tag vid">Video</span></div>
+      </a>
+      <a class="rl-item" href="https://www.genome.gov/about-genomics/fact-sheets/Genomics-and-Medicine" target="_blank">
+        <div class="rl-icon">🏥</div>
+        <div class="rl-text"><span class="rt">NIH Genome — Gene Therapy</span><span class="rs">Real applications, Criterion D examples</span><span class="rl-tag free">Free</span></div>
+      </a>
+      <a class="rl-item" href="https://learn.genetics.utah.edu/content/gel/" target="_blank">
+        <div class="rl-icon">⚡</div>
+        <div class="rl-text"><span class="rt">Virtual Gel Electrophoresis</span><span class="rs">Utah interactive gel lab simulation</span><span class="rl-tag inter">Interactive</span></div>
+      </a>
+      <a class="rl-item" href="https://www.yourgenome.org/explainer/crispr-cas9/" target="_blank">
+        <div class="rl-icon">✂️</div>
+        <div class="rl-text"><span class="rt">Your Genome — CRISPR Explainer</span><span class="rs">Clear, accurate, great for Criterion D prep</span><span class="rl-tag free">Free</span></div>
+      </a>
+      <a class="rl-item" href="https://www.khanacademy.org/science/ap-biology/heredity" target="_blank">
+        <div class="rl-icon">📐</div>
+        <div class="rl-text"><span class="rt">Khan Academy — Heredity Unit</span><span class="rs">Videos + practice problems, free, adaptive</span><span class="rl-tag free">Free</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📋 Standards Alignment</h3>
+    <p style="margin-bottom:14px;font-size:14px;color:var(--muted)">This unit aligns to the following NGSS Performance Expectations and MYP Biology standards:</p>
+    <table class="standards-table">
+      <tr><th>Standard</th><th>Description</th><th>Lesson(s)</th></tr>
+      <tr><td><span class="std-tag std-ngss">NGSS</span>HS-LS3-1</td><td>Construct explanation based on evidence for how environmental and genetic factors influence growth of organisms</td><td>L1, L2</td></tr>
+      <tr><td><span class="std-tag std-ngss">NGSS</span>HS-LS3-2</td><td>Make and defend a claim about heredity — patterns of inheritance</td><td>L1, L2, L3</td></tr>
+      <tr><td><span class="std-tag std-ngss">NGSS</span>HS-LS3-3</td><td>Apply concepts of statistics to explain variation within and between populations</td><td>L1, L2</td></tr>
+      <tr><td><span class="std-tag std-ngss">NGSS</span>HS-LS1-1</td><td>Construct a model of how the structure of DNA determines the structure of proteins</td><td>L3</td></tr>
+      <tr><td><span class="std-tag std-myp">MYP</span>Criterion A</td><td>Knowing and Understanding — define, explain, apply genetics concepts and command terms correctly</td><td>All</td></tr>
+      <tr><td><span class="std-tag std-myp">MYP</span>Criterion B</td><td>Inquiring and Designing — formulate hypotheses based on Punnett square predictions</td><td>L1, L2</td></tr>
+      <tr><td><span class="std-tag std-myp">MYP</span>Criterion C</td><td>Processing and Evaluating — interpret pedigrees and genetic data, evaluate results</td><td>L3</td></tr>
+      <tr><td><span class="std-tag std-myp">MYP</span>Criterion D</td><td>Reflecting on Impacts of Science — evaluate bioethical implications of genetic technology</td><td>L4</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+/* ══════════════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════════════ */
+(()=>{
+  const target=new Date('2026-04-08T00:00:00');
+  const diff=Math.ceil((target-new Date())/864e5);
+  const d=diff>0?diff:0;
+  document.getElementById('countdown').textContent=`April 8 — ${d} days`;
+  document.getElementById('days-msg').textContent=d>0?`${d} days until your assessment — let's get ready!`:'Assessment day is here!';
+  document.getElementById('days-hero').textContent=d;
+})();
+
+/* ══════════════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════════════ */
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('fade-in');
+  setTimeout(()=>document.getElementById('tab-'+id).classList.remove('fade-in'),500);
+}
+
+/* ══════════════════════════════════════════════
+   VOCABULARY TOOLTIPS
+══════════════════════════════════════════════ */
+const VOCAB_ALL={
+  // L1
+  "allele":["One version of a gene.","B = brown eye allele; b = blue eye allele"],
+  "dominant allele":["Expressed whenever present (even one copy).","B masks b in Bb individual"],
+  "recessive allele":["Only expressed when NO dominant allele is present (homozygous rr).","Blue eyes only show in bb individuals"],
+  "homozygous":["Two identical alleles for a gene.","RR or rr"],
+  "heterozygous":["Two different alleles for a gene.","Rr — shows dominant phenotype but carries recessive"],
+  "genotype":["The actual alleles an organism carries.","Bb, RR, ttRr"],
+  "phenotype":["The observable/physical trait that results from the genotype.","Brown hair, round seeds, tall plant"],
+  "law of dominance":["Dominant allele is expressed over recessive when present.","Bb shows brown (dominant) phenotype"],
+  "law of segregation":["Allele pairs separate in meiosis — each gamete gets ONE allele.","Bb → 50% B gametes, 50% b gametes"],
+  "law of independent assortment":["Genes on different chromosomes sort into gametes independently.","Hair color alleles don't affect eye color allele distribution"],
+  "punnett square":["A grid predicting offspring genotype/phenotype probabilities.","2×2 for monohybrid; 4×4 for dihybrid"],
+  "monohybrid cross":["Tracks ONE trait; uses 2×2 Punnett square.","Rr × Rr → 3:1 phenotypic ratio"],
+  "dihybrid cross":["Tracks TWO traits; uses 4×4 Punnett square.","TtRr × TtRr → 9:3:3:1 ratio"],
+  "genotypic ratio":["Ratio of genotype combinations in offspring.","1 RR : 2 Rr : 1 rr"],
+  "phenotypic ratio":["Ratio of observable traits in offspring.","3 Round : 1 Wrinkled from Rr × Rr"],
+  "purebred":["Organism always producing same trait — homozygous.","RR × RR always gives RR offspring"],
+  "f1 generation":["First generation of offspring from a parental cross.","All Rr from RR × rr"],
+  "f2 generation":["Second generation — offspring of F1 × F1 cross.","Rr × Rr gives 3:1 ratio"],
+  // L2
+  "incomplete dominance":["Neither allele fully dominates; heterozygote shows blended phenotype.","Red + White → Pink flowers"],
+  "codominance":["Both alleles fully expressed simultaneously; no blending.","Brown × White horse → Appaloosa (spots)"],
+  "multiple alleles":["More than two allele versions exist in population (individual still has only 2).","ABO blood type: A, B, i"],
+  "blood type ab":["Genotype AB; both A and B codominant — both antigens expressed.","AB universal recipient"],
+  "blood type o":["Genotype ii; no A or B allele — most common type worldwide.","ii is recessive but most common!"],
+  "polygenic inheritance":["Trait controlled by 2+ genes → continuous range of phenotypes.","Skin color, height — bell curve"],
+  "linked genes":["Genes on same chromosome; inherited together; violate Independent Assortment.","Red hair + freckles often co-occur"],
+  "sex chromosomes":["X and Y chromosomes. Females = XX, Males = XY.","Males get X from mom, Y from dad"],
+  "autosomes":["The 22 pairs of non-sex chromosomes.","Most genes are autosomal"],
+  "x-linked gene":["Gene on X chromosome; males express even if recessive (only one X).","Color blindness, hemophilia"],
+  "carrier":["Heterozygous individual who doesn't express the recessive trait but can pass it on.","X^B X^b female — normal but can have colorblind sons"],
+  // L3
+  "mutation":["Permanent change in DNA sequence.","Can be neutral, harmful, or beneficial"],
+  "somatic mutation":["Mutation in body cell; not inherited; can cause cancer.","Liver cell mutation stays in that individual"],
+  "germ line mutation":["Mutation in gamete-producing cell; inherited by offspring.","Every cell of the child carries it"],
+  "mutagen":["Agent that causes DNA mutations.","UV light, radiation, cigarette smoke"],
+  "point mutation":["Change in ONE nucleotide (substitution).","GAG→GUG = sickle cell mutation"],
+  "frameshift mutation":["Insertion/deletion of nucleotide(s) — shifts entire reading frame downstream.","Usually more damaging than point mutations"],
+  "chromosome mutation":["Large-scale change to chromosome structure or number.","Trisomy 21 = Down syndrome"],
+  "nondisjunction":["Chromosomes fail to separate in meiosis → wrong chromosome number.","→ Trisomy 21 from gamete with 2 copies of chr.21"],
+  "pedigree":["Diagram tracing a trait through a family across generations.","Squares = males; circles = females; filled = affected"],
+  "autosomal recessive":["On autosome; 2 recessive alleles needed; skips generations.","Cystic fibrosis, sickle cell"],
+  "autosomal dominant":["On autosome; ONE allele causes trait; every generation; unaffected never have affected kids.","Huntington's disease"],
+  "x-linked recessive":["On X chromosome; males need ONE copy; far more males affected.","Hemophilia, color blindness"],
+  "trisomy 21":["Three copies of chromosome 21; caused by nondisjunction.","Down syndrome"],
+  // L4
+  "genetic engineering":["Deliberately modifying an organism's DNA using biotech tools.","Inserting human insulin gene into bacteria"],
+  "restriction enzyme":["Molecular scissors; cuts DNA at specific recognition sequences.","EcoRI cuts at GAATTC"],
+  "dna ligase":["Molecular glue; joins DNA fragments at sticky ends.","Used after restriction enzymes to seal recombinant DNA"],
+  "recombinant dna":["DNA combining sequences from two or more sources.","Human insulin gene + bacterial plasmid"],
+  "plasmid":["Small circular DNA in bacteria; used as vector for foreign genes.","Foreign gene inserted via restriction enzymes + ligase"],
+  "transgenic organism":["Organism with a gene from a different species.","Bt corn, GloFish"],
+  "gmo":["Genetically Modified Organism — genome altered via biotechnology.","Bt corn, Golden Rice, herbicide-resistant soy"],
+  "pcr":["Polymerase Chain Reaction; amplifies tiny DNA into millions of copies.","Used in COVID tests, forensics, paternity testing"],
+  "gel electrophoresis":["Separates DNA by size using electric current. Small = farther.","Banding patterns used for DNA fingerprinting"],
+  "dna fingerprinting":["PCR + gel electrophoresis → unique DNA profile per individual.","Forensics, paternity — accuracy 1 in billions"],
+  "crispr-cas9":["Guide RNA + Cas9 enzyme cut specific DNA; allows delete/correct/insert.","Used in sickle cell gene therapy trials"],
+  "gene therapy":["Treating disease by correcting/replacing mutated gene in patient cells (somatic).","Sickle cell, hemophilia, inherited blindness"],
+  "somatic gene editing":["Editing body cells — affects only that patient; NOT inherited.","Currently accepted and in clinical use"],
+  "germline gene editing":["Editing embryos/gametes — inherited by ALL descendants. Controversial, mostly banned.","He Jiankui case — CRISPR babies, 2018"],
+  "bioethics":["Study of ethical questions in biological research — asks 'should we?'","Therapeutic vs. enhancement editing debate"],
+  "bt corn":["GMO with bacterial toxin gene — kills crop-eating insects.","Reduces pesticide use"],
+  "golden rice":["GMO rice producing beta-carotene (Vitamin A) to address malnutrition.","Three genes from daffodil and bacteria inserted"],
+};
+
+const vsMap={
+  vs1:["allele","dominant allele","recessive allele","homozygous","heterozygous","genotype","phenotype"],
+  vs1b:["punnett square","monohybrid cross","dihybrid cross","genotypic ratio","phenotypic ratio","law of segregation","law of dominance"],
+  vs2:["incomplete dominance","codominance","multiple alleles","blood type ab","blood type o"],
+  vs2b:["x-linked gene","carrier","sex chromosomes","autosomes","polygenic inheritance","linked genes"],
+  vs3:["mutation","somatic mutation","germ line mutation","mutagen","point mutation","frameshift mutation","chromosome mutation"],
+  vs3b:["pedigree","autosomal recessive","autosomal dominant","x-linked recessive","trisomy 21"],
+  vs4:["genetic engineering","restriction enzyme","dna ligase","recombinant dna","plasmid","pcr","gel electrophoresis","crispr-cas9"],
+  vs4b:["gene therapy","somatic gene editing","germline gene editing","bioethics","gmo","dna fingerprinting","transgenic organism"],
+};
+const colorMap={vs1:'c1',vs1b:'c1',vs2:'c2',vs2b:'c2',vs3:'c3',vs3b:'c3',vs4:'c4',vs4b:'c4'};
+
+function buildVocab(){
+  Object.entries(vsMap).forEach(([id,terms])=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const cls=colorMap[id];
+    el.innerHTML=terms.map(t=>`<span class="vp ${cls}" data-term="${t}" onclick="showTip(event,'${t}')">${t}</span>`).join('');
+  });
+}
+
+const tt=document.getElementById('tooltip');
+let ttTimer;
+function showTip(e,term){
+  const entry=VOCAB_ALL[term.toLowerCase()];
+  if(!entry)return;
+  const pill=e.currentTarget;
+  pill.classList.add('popped');
+  setTimeout(()=>pill.classList.remove('popped'),200);
+  document.getElementById('tt-term').textContent=term;
+  document.getElementById('tt-def').textContent=entry[0]+(entry[1]?' — e.g., '+entry[1]:'');
+  const rect=e.currentTarget.getBoundingClientRect();
+  let left=rect.left;let top=rect.bottom+8+window.scrollY;
+  if(left+280>window.innerWidth)left=window.innerWidth-290;
+  tt.style.left=left+'px';tt.style.top=top+'px';
+  tt.classList.add('show');
+  clearTimeout(ttTimer);ttTimer=setTimeout(()=>tt.classList.remove('show'),3000);
+}
+document.addEventListener('click',e=>{if(!e.target.classList.contains('vp'))tt.classList.remove('show');});
+
+function showConcept(n,btn){
+  document.querySelectorAll('.concept-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.cn-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cp'+n).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ══════════════════════════════════════════════
+   MCQ BANK
+══════════════════════════════════════════════ */
+const QS=[
+  // L1 - Difficulty 1
+  {lesson:'L1',diff:1,q:"A pea plant has genotype Rr. According to the Law of Segregation, what gametes can it produce?",opts:["Only R gametes","Only r gametes","R and r gametes in equal proportions","RR and rr gametes"],ans:2,fb:{c:"✅ Correct! The Law of Segregation means the two alleles (R and r) separate during meiosis. A Rr plant produces 50% R gametes and 50% r gametes — one allele per gamete.",w:["Only a RR plant produces only R gametes. Rr has BOTH alleles and separates them during meiosis.","Only a rr plant produces only r gametes. Rr produces BOTH types.","Gametes are haploid — one allele each. RR and rr would be genotypes of offspring, not gametes from Rr."]}},
+  {lesson:'L1',diff:1,q:"Two parents are both Bb (heterozygous brown hair). What is the probability their child will have blonde hair (bb)?",opts:["0%","25%","50%","75%"],ans:1,fb:{c:"✅ Correct! Bb × Bb → 1 BB : 2 Bb : 1 bb. The bb genotype (blonde) represents 1 out of 4 boxes = 25%.",w:["It IS possible! Both parents carry the recessive b allele — there's a 25% chance.","50% would be the result of Bb × bb (test cross), not Bb × Bb.","75% is the dominant phenotype proportion. Recessive = 25%."]}},
+  {lesson:'L1',diff:2,q:"You cross RR × rr pea plants. What will ALL F1 offspring look like?",opts:["3 Round : 1 Wrinkled","All wrinkled","All round (100%)","50% round, 50% wrinkled"],ans:2,fb:{c:"✅ Perfect! Every offspring gets one R from the round parent and one r from the wrinkled parent → all Rr. R is dominant, so ALL show round seeds. The 3:1 appears in F2 (Rr × Rr).",w:["3:1 comes from Rr × Rr, not RR × rr.","None will be wrinkled — they're all Rr and R is dominant.","1:1 results from a test cross (Rr × rr). RR × rr gives 100% Rr."]}},
+  {lesson:'L1',diff:2,q:"What is the genotypic ratio expected from a Rr × Rr monohybrid cross?",opts:["3:1","1:2:1 (RR:Rr:rr)","1:1","2:1:1"],ans:1,fb:{c:"✅ Right! Rr × Rr gives 1 RR : 2 Rr : 1 rr — this is the genotypic ratio. Note that the phenotypic ratio is 3:1 (3 round : 1 wrinkled), because RR and Rr both look round.",w:["3:1 is the PHENOTYPIC ratio. The question asks for genotypic — which is 1:2:1.","1:1 is the genotypic ratio of a test cross (Rr × rr): 1 Rr : 1 rr.","2:1:1 is not a standard Mendelian ratio for a monohybrid cross."]}},
+  {lesson:'L1',diff:3,q:"Two dihybrid TtRr × TtRr parents cross. How many of the 16 offspring boxes are expected to be Tall AND Wrinkled (T_rr)?",opts:["1","3","9","6"],ans:1,fb:{c:"✅ Correct! From TtRr × TtRr: 9 tall+round : 3 tall+wrinkled : 3 short+round : 1 short+wrinkled. Tall+Wrinkled (T_rr) = 3 out of 16 boxes.",w:["1 box = short+wrinkled (ttrr). Tall+wrinkled is 3.","9 is the tall+round (T_R_) category.","6 is not a standard phenotypic count in a 9:3:3:1 cross."]}},
+
+  // L2 - Difficulty 1
+  {lesson:'L2',diff:1,q:"Red snapdragons (RR) × White snapdragons (R'R') produce ALL pink offspring (RR'). This is an example of:",opts:["Codominance","Incomplete dominance","Multiple alleles","Simple dominance"],ans:1,fb:{c:"✅ Correct! Pink is a NEW BLENDED phenotype — neither red nor white. That's incomplete dominance. In codominance, you would see both red AND white patches on the same flower simultaneously.",w:["Codominance would produce flowers with BOTH red AND white patches at the same time — not a new pink color.","Multiple alleles means 3+ allele versions exist in the population. This example only has 2 (R and R').","Simple dominance would show one phenotype fully masking the other — all offspring would be red OR all white, not pink."]}},
+  {lesson:'L2',diff:1,q:"A person has blood type AB. What is their genotype, and what inheritance pattern does this demonstrate?",opts:["ii — multiple alleles","AA or Ai — simple dominance","AB — codominance","AB — incomplete dominance"],ans:2,fb:{c:"✅ Exactly right! Blood type AB has genotype AB — one A allele and one B allele. Both are fully expressed simultaneously (you can detect BOTH A and B antigens on their red blood cells). This is codominance.",w:["ii is blood type O genotype. Blood type AB is AB.","AA or Ai is blood type A. Blood type AB has BOTH A and B alleles expressed.","AB blood type is codominance (both expressed simultaneously), not incomplete dominance (which would create a blended new type)."]}},
+  {lesson:'L2',diff:2,q:"A carrier mother (X^B X^b) × normal father (X^B Y). What is the probability of having an AFFECTED SON?",opts:["0%","25%","50%","100%"],ans:1,fb:{c:"✅ Correct! The cross produces 4 equal offspring types: X^B X^B (normal girl), X^b X^B (carrier girl), X^B Y (normal boy), X^b Y (affected boy). Affected son = 1 out of 4 = 25%. Note: 50% of SONS are affected, but only 25% of ALL offspring.",w:["There IS a chance! Sons inherit their X from their mother, and she carries the recessive allele.","50% of sons will be affected, but the question asks about all offspring — only 25% of all children.","100% would mean all children are affected — but normal sons (X^B Y) are also possible."]}},
+  {lesson:'L2',diff:2,q:"Why are X-linked recessive traits much more common in males than females?",opts:["Males are biologically more susceptible to genetic disorders","Males have only ONE X chromosome — any recessive allele on their X is automatically expressed","Females have a stronger immune system that corrects these disorders","Males inherit more recessive alleles from their fathers"],ans:1,fb:{c:"✅ Perfect! Males are XY. With only one X, whatever allele is on that X — dominant or recessive — gets expressed. There's no second X to carry a dominant allele that could mask it. Females need TWO copies of the recessive allele to be affected.",w:["Being 'susceptible' is not biological — this is purely about chromosome copy number.","The immune system doesn't correct genetic traits — this is purely a chromosomes question.","Males get Y from their father and X from their mother. The Y carries no alleles for X-linked genes."]}},
+
+  // L3 - Difficulty 1
+  {lesson:'L3',diff:1,q:"A mutation occurs in a skin cell from sun exposure. Can your children inherit this mutation?",opts:["Yes — any mutation can be inherited","No — somatic cell mutations are not passed to offspring","Only if you get a sunburn more than once","Only if it's a frameshift mutation"],ans:1,fb:{c:"✅ Correct! Skin cells are somatic (body) cells. They never become eggs or sperm, so their mutations cannot be passed to children. Only germ line mutations (in gamete-producing cells) are heritable.",w:["Only germ line mutations can be inherited. Somatic mutations stay within that individual.","Frequency of sunburns doesn't matter — the KEY issue is what type of CELL the mutation is in.","The type of mutation (frameshift or substitution) doesn't determine whether it's heritable — the type of CELL matters."]}},
+  {lesson:'L3',diff:2,q:"In a pedigree, TWO UNAFFECTED parents have an AFFECTED child. What does this tell you?",opts:["The trait is autosomal dominant — one parent must be a carrier","The trait is autosomal recessive — both parents are carriers (Aa × Aa)","The trait is X-linked — the father passed it to the child","The pedigree must have an error"],ans:1,fb:{c:"✅ Exactly right! Two unaffected parents with an affected child is the DEFINING clue for autosomal recessive. The parents must both carry a hidden recessive allele (Aa × Aa → 25% chance of aa affected child).",w:["Autosomal dominant would appear in EVERY generation. An affected child would require an affected parent if the trait were dominant.","For X-linked recessive, we'd expect far more males affected, and the pattern would involve carrier mothers specifically — not just two unaffected parents.","This is entirely consistent with autosomal recessive — it's the most common finding that confirms this pattern."]}},
+  {lesson:'L3',diff:2,q:"Which type of mutation is typically MORE DAMAGING — a frameshift or a point substitution? Why?",opts:["Point substitution, because it changes more nucleotides","Frameshift, because it shifts ALL codons downstream from the mutation site","They are equally damaging","Point substitution, because it always creates a stop codon"],ans:1,fb:{c:"✅ Correct! A frameshift (insertion or deletion of nucleotides) shifts the ENTIRE reading frame for every codon after the mutation point — like scrambling every word in a sentence after one deletion. A point substitution changes only ONE codon, which may even be silent.",w:["A point substitution changes ONE nucleotide and therefore ONE codon at most. A frameshift changes every codon from the mutation site forward.","They are NOT equally damaging. Frameshifts are generally much worse because of the cascade effect on all downstream codons.","Point substitutions can be silent (no amino acid change), missense (one amino acid change), or nonsense (stop codon). They don't ALWAYS create a stop codon — and even nonsense mutations only affect from that point, unlike frameshifts."]}},
+  {lesson:'L3',diff:3,q:"A pedigree shows: many more males affected than females, the trait skips generations, and an affected father's sons are all unaffected. What inheritance pattern is this?",opts:["Autosomal dominant","Autosomal recessive","X-linked recessive","Polygenic"],ans:2,fb:{c:"✅ All three clues confirm X-linked recessive: (1) far more males affected (males need only ONE recessive X allele), (2) skips generations through carrier females, (3) affected fathers cannot pass to sons because sons get the Y from dad — the STRONGEST single clue.",w:["Autosomal dominant would appear every generation, affect both sexes equally, and an affected father WOULD pass to ~50% of sons.","Autosomal recessive would affect both sexes equally — the sex imbalance here rules it out as autosomal.","Polygenic inheritance produces a continuous spectrum of phenotypes — it doesn't produce clear affected/unaffected categories in a pedigree."]}},
+
+  // L4 - Difficulty 1
+  {lesson:'L4',diff:1,q:"Which TWO tools work together to insert a human gene into a bacterial plasmid?",opts:["PCR and gel electrophoresis","Restriction enzymes and DNA ligase","CRISPR and recombinant DNA","Guide RNA and Cas9"],ans:1,fb:{c:"✅ Exactly! Restriction enzymes CUT the DNA at specific recognition sequences, creating complementary sticky ends. DNA ligase then JOINS the fragments together, sealing the human gene into the plasmid. Together they create recombinant DNA.",w:["PCR amplifies DNA — it doesn't cut or join it. Gel electrophoresis separates by size — also not cut/join.","CRISPR-Cas9 is the modern precision editing system — not the traditional cut-and-paste tool for making recombinant DNA.","Guide RNA + Cas9 ARE the components of CRISPR. They're used for in-genome editing, not for inserting genes into plasmids."]}},
+  {lesson:'L4',diff:2,q:"In gel electrophoresis, which DNA band is CLOSEST to the loading wells?",opts:["The smallest fragment (100 bp)","The largest fragment (1000 bp)","All bands are at equal distance","The most abundant fragment"],ans:1,fb:{c:"✅ Correct! Large DNA fragments experience more resistance in the gel and travel LESS distance from the wells. Small = far; Large = close to wells. Remember: think of the gel like a molecular obstacle course — heavier fragments can't run as fast.",w:["The smallest fragment travels the FARTHEST from the wells because it moves fastest through the gel matrix.","All bands at equal distance would make electrophoresis useless! The whole point is separation by size.","Abundance affects band BRIGHTNESS (intensity), not position. Position = size only."]}},
+  {lesson:'L4',diff:2,q:"Why is He Jiankui's 2018 germline editing experiment considered ethically wrong, even if his intention was to prevent HIV?",opts:["CRISPR doesn't actually work in humans","The babies will have unfair advantages over other humans","The heritable changes affect all descendants, the babies couldn't consent, safer alternatives existed, and safety risks were inadequately studied","Genetic editing for disease prevention should always be banned"],ans:2,fb:{c:"✅ Excellent — this is the Criterion D level answer! Multiple problems converged: (1) heritable changes affect all descendants without their consent; (2) safer alternatives (IVF screening) existed; (3) CRISPR off-target effects hadn't been adequately studied; (4) the scientific community hadn't approved germline editing. He went to prison for 3 years.",w:["CRISPR does work in humans — the modification was actually made. The problem was ETHICAL and SAFETY-based, not technical.","Unfair advantages is a concern for enhancement editing (like selecting for intelligence). The main issues with He Jiankui were consent, heritability, prematurity of the science, and existence of safer alternatives.","This is an overreach. The scientific community supports somatic gene therapy (not inherited) broadly. The specific objection is to germline editing (inherited by all descendants) done prematurely without adequate safety data or ethical oversight."]}},
+  {lesson:'L4',diff:3,q:"What is the KEY difference between somatic gene therapy and germline gene editing?",opts:["Somatic therapy uses CRISPR; germline uses restriction enzymes","Somatic therapy only treats cancer; germline treats all diseases","Somatic therapy affects only the patient and is NOT inherited; germline affects all future descendants and IS inherited","They are the same thing from different perspectives"],ans:2,fb:{c:"✅ This is the critical Criterion D distinction! Somatic editing = changes stay in ONE patient's body cells, cannot be inherited. Germline editing = changes become part of the genome and are passed to every cell of every descendant. This inheritability is what makes germline so ethically complex.",w:["Both types can use CRISPR or traditional tools — the distinction is WHICH CELLS are edited, not which tool.","Somatic gene therapy has been used for sickle cell, hemophilia, inherited blindness — far beyond just cancer.","They are fundamentally different in the most important way: one is heritable, one isn't. This single distinction drives all the ethical debate."]}},
+];
+
+let qState=[],correctCount=0,totalAnswered=0;
+
+function buildMCQ(){
+  const el=document.getElementById('mcq-bank');
+  QS.forEach((q,qi)=>{
+    qState.push(false);
+    const diff=['','Level 1 — Recall','Level 2 — Apply','Level 3 — Analyze'][q.diff];
+    const diffCls=['','L1','L2','L3'][q.diff];
+    el.innerHTML+=`<div class="mcq-card" data-lesson="${q.lesson}">
+      <div class="mcq-meta">
+        <span class="mcq-tag ${diffCls}">${diff}</span>
+        <span class="mcq-diff">${q.lesson}</span>
+      </div>
+      <div class="mcq-q">${q.q}</div>
+      <div class="mcq-opts">${q.opts.map((o,oi)=>`<button class="mcq-opt" id="mq${qi}_${oi}" onclick="pickQ(${qi},${oi})"><span class="ol">${'ABCD'[oi]}</span><span>${o}</span></button>`).join('')}</div>
+      <div class="mcq-fb" id="mqfb${qi}"></div>
+    </div>`;
+  });
+}
+
+function pickQ(qi,oi){
+  if(qState[qi])return;
+  qState[qi]=true;
+  totalAnswered++;
+  const q=QS[qi];
+  document.querySelectorAll(`[id^="mq${qi}_"]`).forEach(b=>b.classList.add('locked'));
+  const fb=document.getElementById('mqfb'+qi);
+  if(oi===q.ans){
+    correctCount++;
+    document.getElementById(`mq${qi}_${oi}`).classList.add('correct');
+    fb.className='mcq-fb show correct';
+    fb.innerHTML=`<div class="fb-head">✅ Correct!</div>${q.fb.c}`;
+  } else {
+    document.getElementById(`mq${qi}_${oi}`).classList.add('wrong');
+    document.getElementById(`mq${qi}_${q.ans}`).classList.add('correct');
+    fb.className='mcq-fb show wrong';
+    fb.innerHTML=`<div class="fb-head">❌ Not quite</div>${q.fb.w[oi]}`;
+  }
+  document.getElementById('sc-correct').textContent=correctCount;
+  document.getElementById('sc-total').textContent=totalAnswered;
+  document.getElementById('sc-pct').textContent=Math.round(correctCount/totalAnswered*100)+'%';
+  updateGlobal();
+}
+
+function filterQ(lesson,btn){
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#mcq-bank .mcq-card').forEach(card=>{
+    card.style.display=(lesson==='all'||card.dataset.lesson===lesson)?'block':'none';
+  });
+}
+
+/* ══════════════════════════════════════════════
+   PUNNETT SIMULATOR
+══════════════════════════════════════════════ */
+function gam(g){return[g[0],g[g.length-1]];}
+function comb(a,b){let s=[a,b];s.sort((x,y)=>x.toUpperCase().charCodeAt(0)-y.toUpperCase().charCodeAt(0)||x.localeCompare(y));return s.join('');}
+function isDom(g){return g.split('').some(c=>c===c.toUpperCase()&&c!==c.toLowerCase());}
+function runMono(){
+  const p1=document.getElementById('p1').value,p2=document.getElementById('p2').value;
+  const g1=gam(p1),g2=gam(p2);
+  ['ph1','ph2'].forEach((id,i)=>document.getElementById(id).textContent=g1[i]);
+  ['ps1','ps2'].forEach((id,i)=>document.getElementById(id).textContent=g2[i]);
+  const res=[comb(g1[0],g2[0]),comb(g1[1],g2[0]),comb(g1[0],g2[1]),comb(g1[1],g2[1])];
+  ['pr1','pr2','pr3','pr4'].forEach((id,i)=>{
+    const el=document.getElementById(id);el.textContent=res[i];
+    el.style.animation='none';setTimeout(()=>el.style.animation='popIn .35s ease',10);
+  });
+  const cnt={};res.forEach(r=>{cnt[r]=(cnt[r]||0)+1;});
+  const genoStr=Object.entries(cnt).map(([g,c])=>`${c} ${g}`).join(' : ');
+  const dc=res.filter(r=>isDom(r)).length,rc=4-dc;
+  const ph=rc===0?'All Dominant':dc===0?'All Recessive':dc===rc?'1 Dom : 1 Rec':dc===3?'3 Dom : 1 Rec':`${dc} Dom : ${rc} Rec`;
+  document.getElementById('res-geno').textContent=genoStr;
+  document.getElementById('res-pheno').textContent=ph;
+  document.getElementById('res-dom').textContent=(dc/4*100)+'%';
+  document.getElementById('res-rec').textContent=(rc/4*100)+'%';
+  document.getElementById('pres').style.display='block';
+}
+
+/* ══════════════════════════════════════════════
+   FLASHCARDS — FULL 70-CARD DECK
+══════════════════════════════════════════════ */
+const ALL_CARDS=Object.entries(VOCAB_ALL).map(([t,[d,e]])=>({
+  t:t.charAt(0).toUpperCase()+t.slice(1),
+  lesson:Object.keys(vsMap).find(k=>vsMap[k].includes(t))?
+    (colorMap[Object.keys(vsMap).find(k=>vsMap[k].includes(t))]||'').replace('c','Lesson '):
+    getLesson(t),
+  d,e:e||''
+}));
+
+function getLesson(t){
+  const l1=['allele','dominant allele','recessive allele','homozygous','heterozygous','genotype','phenotype','law of dominance','law of segregation','law of independent assortment','punnett square','monohybrid cross','dihybrid cross','genotypic ratio','phenotypic ratio','purebred','f1 generation','f2 generation'];
+  const l2=['incomplete dominance','codominance','multiple alleles','blood type ab','blood type o','polygenic inheritance','linked genes','sex chromosomes','autosomes','x-linked gene','carrier'];
+  const l3=['mutation','somatic mutation','germ line mutation','mutagen','point mutation','frameshift mutation','chromosome mutation','nondisjunction','pedigree','autosomal recessive','autosomal dominant','x-linked recessive','trisomy 21'];
+  if(l1.includes(t))return'Lesson 1';
+  if(l2.includes(t))return'Lesson 2';
+  if(l3.includes(t))return'Lesson 3';
+  return'Lesson 4';
+}
+ALL_CARDS.forEach(c=>{if(!c.lesson||c.lesson==='Lesson ')c.lesson=getLesson(c.t.toLowerCase());});
+
+let fcDeck=[],fcKnown=[],fcCur=0,fcFilter='all';
+
+function filterFC(f,btn){
+  document.querySelectorAll('.fc-mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  fcFilter=f;initFC();
+}
+
+function initFC(){
+  const base=ALL_CARDS.filter(c=>fcFilter==='all'||c.lesson.replace('Lesson ','L')===fcFilter);
+  fcDeck=[...Array(base.length).keys()];
+  fcKnown=new Array(base.length).fill(null);
+  fcCur=0;
+  const total=fcDeck.length;
+  document.getElementById('fc-total-stat').textContent=total+' cards';
+  document.getElementById('fc-known-stat').textContent='0 mastered';
+  document.getElementById('fc-left-stat').textContent=total+' remaining';
+  dots(base.length);showFC(base);
+  document.getElementById('fc-done').style.display='none';
+  document.getElementById('fc').style.display='block';
+  document.querySelector('.fc-actions').style.display='flex';
+}
+
+function getFilteredCards(){
+  return ALL_CARDS.filter(c=>fcFilter==='all'||c.lesson.replace('Lesson ','L')===fcFilter);
+}
+
+function dots(n){
+  const el=document.getElementById('fc-dots');el.innerHTML='';
+  for(let i=0;i<n;i++){const d=document.createElement('div');d.className='fc-dot'+(fcKnown[i]===true?' k':fcKnown[i]===false?' s':'');el.appendChild(d);}
+}
+
+function showFC(base){
+  base=base||getFilteredCards();
+  if(!fcDeck.length){doneFC(base);return;}
+  const c=base[fcDeck[fcCur%fcDeck.length]];
+  document.getElementById('fc-t').textContent=c.t;
+  document.getElementById('fc-d').textContent=c.d;
+  document.getElementById('fc-e').textContent=c.e?'Example: '+c.e:'';
+  document.getElementById('fc-lesson').textContent=c.lesson;
+  document.getElementById('fc-ct').textContent=`Card ${(fcCur%fcDeck.length)+1} of ${fcDeck.length}`;
+  document.getElementById('fc').classList.remove('flipped');
+}
+
+function flipFC(){document.getElementById('fc').classList.toggle('flipped');}
+
+function markFC(ok){
+  const base=getFilteredCards();
+  if(!fcDeck.length)return;
+  const ci=fcDeck[fcCur%fcDeck.length];
+  fcKnown[ci]=ok;
+  if(ok)fcDeck=fcDeck.filter(i=>i!==ci);
+  else fcCur++;
+  const known=fcKnown.filter(k=>k===true).length;
+  const total=getFilteredCards().length;
+  document.getElementById('fc-known-stat').textContent=known+' mastered';
+  document.getElementById('fc-left-stat').textContent=fcDeck.length+' remaining';
+  dots(total);
+  if(!fcDeck.length){doneFC(base);return;}
+  fcCur=fcCur%fcDeck.length;showFC(base);
+  updateGlobal();
+}
+
+function doneFC(base){
+  document.getElementById('fc-done').style.display='block';
+  document.getElementById('fc').style.display='none';
+  document.querySelector('.fc-actions').style.display='none';
+  const known=fcKnown.filter(k=>k===true).length;
+  document.getElementById('fc-done-msg').textContent=`You mastered ${known} of ${(base||getFilteredCards()).length} terms! Keep drilling before April 8.`;
+}
+
+function restartFC(){initFC();}
+
+/* ══════════════════════════════════════════════
+   STUDY GUIDE BUILDER
+══════════════════════════════════════════════ */
+function renderSG(){
+  const name=document.getElementById('sg-name').value.trim();
+  const soi=document.getElementById('sg-soi').value.trim();
+  const l1=document.getElementById('sg-l1').value.trim();
+  const l2=document.getElementById('sg-l2').value.trim();
+  const l3=document.getElementById('sg-l3').value.trim();
+  const l4=document.getElementById('sg-l4').value.trim();
+  const terms=document.getElementById('sg-terms').value.trim();
+  const q=document.getElementById('sg-q').value.trim();
+  const blank='<span class="sg-blank"></span>';
+  if(!name&&!soi&&!l1&&!l2&&!l3&&!l4&&!terms&&!q){
+    document.getElementById('sg-output').innerHTML='<div class="sg-empty">Fill in the fields on the left to see your study guide appear here...</div>';
+    return;
+  }
+  let html=`<div class="sg-h1">Unit 5: Genetics & Heredity — Study Guide</div>`;
+  if(name)html+=`<div class="sg-body"><strong>Student:</strong> ${name} &nbsp;|&nbsp; <strong>Assessment:</strong> April 8, 2026</div>`;
+  html+=`<div class="sg-h2">Statement of Inquiry</div>`;
+  html+=`<div class="sg-body">${soi||'The patterns by which traits are inherited reflect the underlying mechanisms of DNA, probability, and the evolving power of biotechnology... '+blank}</div>`;
+  html+=`<div class="sg-h2">Lesson 1 — Mendel's Laws & Punnett Squares</div>`;
+  html+=`<div class="sg-body">${l1?l1.split('\n').join('<br>'):'<em class="sg-empty">Fill in the Lesson 1 section on the left to add notes here.</em>'}</div>`;
+  html+=`<div class="sg-h2">Lesson 2 — Complex Inheritance Patterns</div>`;
+  html+=`<div class="sg-body">${l2?l2.split('\n').join('<br>'):'<em class="sg-empty">Fill in the Lesson 2 section.</em>'}</div>`;
+  html+=`<div class="sg-h2">Lesson 3 — Mutations & Pedigrees</div>`;
+  html+=`<div class="sg-body">${l3?l3.split('\n').join('<br>'):'<em class="sg-empty">Fill in the Lesson 3 section.</em>'}</div>`;
+  html+=`<div class="sg-h2">Lesson 4 — Genetic Engineering & Bioethics</div>`;
+  html+=`<div class="sg-body">${l4?l4.split('\n').join('<br>'):'<em class="sg-empty">Fill in the Lesson 4 section.</em>'}</div>`;
+  if(terms){
+    html+=`<div class="sg-h2">Terms I'm Reviewing</div>`;
+    terms.split('\n').forEach(line=>{
+      if(!line.trim())return;
+      const colonIdx=line.indexOf(':');
+      if(colonIdx>-1){html+=`<div class="sg-body"><span class="sg-term">${line.slice(0,colonIdx).trim()}</span>: <span class="sg-def">${line.slice(colonIdx+1).trim()}</span></div>`;}
+      else html+=`<div class="sg-body">${line}</div>`;
+    });
+  }
+  if(q){
+    html+=`<div class="sg-h2">Questions I Still Have</div>`;
+    html+=`<div class="sg-body">${q.split('\n').join('<br>')}</div>`;
+  }
+  document.getElementById('sg-output').innerHTML=html;
+}
+
+function copySG(){
+  const text=document.getElementById('sg-output').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.copy-btn');
+    btn.textContent='Copied! ✓';btn.style.background='var(--correct)';
+    setTimeout(()=>{btn.textContent='Copy Text';btn.style.background='';},2000);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   CHECKLIST
+══════════════════════════════════════════════ */
+const CHECKLIST=[
+  {lesson:'L1 — Mendel',tag:'L1',color:'c1',items:[
+    {text:"I can state Mendel's three laws in my own words",crit:'A'},
+    {text:"I can explain the difference between genotype and phenotype with an example",crit:'A'},
+    {text:"I can explain the difference between dominant and recessive alleles",crit:'A'},
+    {text:"I can complete a 2×2 monohybrid Punnett square from scratch",crit:'A'},
+    {text:"I can calculate the genotypic AND phenotypic ratio from a monohybrid cross",crit:'C'},
+    {text:"I can use FOIL to list gametes for a dihybrid parent (e.g., TtRr)",crit:'A'},
+    {text:"I can complete a 4×4 dihybrid Punnett square",crit:'A'},
+    {text:"I can explain why the 9:3:3:1 ratio only occurs with two dihybrid heterozygotes",crit:'A'},
+  ]},
+  {lesson:'L2 — Complex Patterns',tag:'L2',color:'c2',items:[
+    {text:"I can distinguish incomplete dominance from codominance with an example of each",crit:'A'},
+    {text:"I can explain why pink snapdragons are NOT codominance",crit:'A'},
+    {text:"I can explain why blood type AB is an example of codominance AND multiple alleles",crit:'A'},
+    {text:"I can list the 4 blood type genotypes and explain why O is recessive but common",crit:'A'},
+    {text:"I can set up a sex-linked cross using X-notation (e.g., X^B X^b × X^B Y)",crit:'A'},
+    {text:"I can explain why X-linked recessive traits affect more males than females",crit:'A'},
+    {text:"I can explain what polygenic inheritance is and give an example",crit:'A'},
+  ]},
+  {lesson:'L3 — Mutations & Pedigrees',tag:'L3',color:'c3',items:[
+    {text:"I can explain the difference between somatic and germ line mutations",crit:'A'},
+    {text:"I can explain why somatic mutations cannot be inherited by offspring",crit:'A'},
+    {text:"I can describe point mutations and frameshift mutations with examples",crit:'A'},
+    {text:"I can explain why frameshifts are usually more damaging than substitutions",crit:'A'},
+    {text:"I can read pedigree symbols (squares, circles, filled, carrier)",crit:'A'},
+    {text:"I can use the 4-step process to identify autosomal recessive, autosomal dominant, and X-linked recessive patterns",crit:'C'},
+    {text:"I can apply the 'affected father's sons are unaffected' rule to identify X-linked inheritance",crit:'C'},
+    {text:"I can assign genotypes to individuals in a pedigree",crit:'C'},
+  ]},
+  {lesson:'L4 — Genetic Engineering',tag:'L4',color:'c4',items:[
+    {text:"I can explain the roles of restriction enzymes and DNA ligase in creating recombinant DNA",crit:'A'},
+    {text:"I can explain what gel electrophoresis separates and the rule for band position (small = farther)",crit:'A'},
+    {text:"I can explain how DNA fingerprinting works and name two real applications",crit:'A'},
+    {text:"I can describe how CRISPR-Cas9 works at the molecular level",crit:'A'},
+    {text:"I can describe TWO real-world applications of genetic engineering (GMOs, gene therapy, insulin)",crit:'A'},
+    {text:"I can distinguish somatic gene therapy from germline gene editing",crit:'D'},
+    {text:"I can evaluate the He Jiankui case from multiple perspectives (consent, safety, heritability)",crit:'D'},
+    {text:"I can construct a reasoned argument about a genetic technology using evidence (Criterion D)",crit:'D'},
+  ]},
+];
+
+const CL_COLORS={L1:'#EBF0FA',L2:'#E0F4F4',L3:'#EDE7F6',L4:'#FFF0E5'};
+const CL_TEXT={L1:'#1B3A6B',L2:'#0B6E6E',L3:'#5535A3',L4:'#B84F00'};
+
+function buildChecklist(){
+  const el=document.getElementById('checklist-container');
+  let allItems=0;
+  CHECKLIST.forEach(section=>{
+    const tag=section.tag;
+    const textColor=CL_TEXT[tag];const bgColor=CL_COLORS[tag];
+    let html=`<div class="checklist-card"><h4 style="color:${textColor}">${section.lesson} <span class="tag" style="background:${bgColor};color:${textColor}">${tag}</span></h4>`;
+    section.items.forEach((item,i)=>{
+      const key=`cl-${tag}-${i}`;
+      const checked=localStorage.getItem(key)==='true';
+      allItems++;
+      html+=`<div class="check-item" onclick="toggleCL('${key}',this)">
+        <div class="ci-box${checked?' checked':''}" id="${key}-box"></div>
+        <div class="ci-text${checked?' done':''}">${item.text} <span class="ci-badge ${item.crit}">Crit ${item.crit}</span></div>
+      </div>`;
+    });
+    html+='</div>';
+    el.innerHTML+=html;
+  });
+}
+
+function toggleCL(key,row){
+  const box=row.querySelector('.ci-box');
+  const text=row.querySelector('.ci-text');
+  const nowChecked=!box.classList.contains('checked');
+  box.classList.toggle('checked',nowChecked);
+  text.classList.toggle('done',nowChecked);
+  localStorage.setItem(key,nowChecked);
+  updateGlobal();updateRings();
+}
+
+function updateRings(){
+  const lessons=['L1','L2','L3','L4'];
+  const el=document.getElementById('mastery-rings');
+  if(!el)return;el.innerHTML='';
+  lessons.forEach(tag=>{
+    const items=CHECKLIST.find(s=>s.tag===tag)?.items||[];
+    const total=items.length;
+    const done=items.filter((_,i)=>localStorage.getItem(`cl-${tag}-${i}`)==='true').length;
+    const pct=total>0?Math.round(done/total*100):0;
+    const r=30,c=2*Math.PI*r,offset=c-(pct/100)*c;
+    const textColor=CL_TEXT[tag];
+    el.innerHTML+=`<div class="mastery-ring">
+      <svg class="ring-svg" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="${r}" fill="none" stroke="#E2E8F0" stroke-width="6"/>
+        <circle cx="36" cy="36" r="${r}" fill="none" stroke="${textColor}" stroke-width="6"
+          stroke-dasharray="${c}" stroke-dashoffset="${offset}" stroke-linecap="round"
+          transform="rotate(-90 36 36)" style="transition:stroke-dashoffset .6s ease"/>
+        <text x="36" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="${textColor}" font-family="JetBrains Mono">${pct}%</text>
+      </svg>
+      <div class="ring-label">${tag.replace('L','Lesson ')}</div>
+      <div class="ring-pct">${done}/${total}</div>
+    </div>`;
+  });
+}
+
+/* ══════════════════════════════════════════════
+   GLOBAL PROGRESS
+══════════════════════════════════════════════ */
+function updateGlobal(){
+  let total=0,done=0;
+  CHECKLIST.forEach(s=>{
+    s.items.forEach((_,i)=>{total++;if(localStorage.getItem(`cl-${s.tag}-${i}`)==='true')done++;});
+  });
+  const fcDone=ALL_CARDS.filter((_,i)=>false).length; // placeholder — FC counted separately
+  const pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('global-bar').style.width=pct+'%';
+  document.getElementById('global-pct').textContent=pct+'%';
+}
+
+function saveReflect(){
+  ['r1','r2','r3','r4'].forEach(id=>{
+    const v=document.getElementById(id)?.value;
+    if(v!==undefined)localStorage.setItem('reflect-'+id,v);
+  });
+}
+
+function loadReflect(){
+  ['r1','r2','r3','r4'].forEach(id=>{
+    const v=localStorage.getItem('reflect-'+id);
+    const el=document.getElementById(id);
+    if(v&&el)el.value=v;
+  });
+}
+
+function resetAll(){
+  if(!confirm('Reset all progress? This clears all checkboxes and reflections.'))return;
+  CHECKLIST.forEach(s=>s.items.forEach((_,i)=>localStorage.removeItem(`cl-${s.tag}-${i}`)));
+  ['r1','r2','r3','r4'].forEach(id=>localStorage.removeItem('reflect-'+id));
+  location.reload();
+}
+
+// RESTORE CHECKLIST STATE
+function restoreChecklistState(){
+  CHECKLIST.forEach(s=>{
+    s.items.forEach((_,i)=>{
+      const key=`cl-${s.tag}-${i}`;
+      if(localStorage.getItem(key)==='true'){
+        const box=document.getElementById(key+'-box');
+        if(box){
+          box.classList.add('checked');
+          box.parentElement?.querySelector('.ci-text')?.classList.add('done');
+        }
+      }
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════ */
+buildVocab();
+buildMCQ();
+initFC();
+buildChecklist();
+setTimeout(()=>{restoreChecklistState();updateGlobal();updateRings();loadReflect();},100);
+</script>
+</body>
+</html>
