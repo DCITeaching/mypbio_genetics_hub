@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 Results — DCI MYP Biology</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:#0D1F3C; --navy2:#162d54; --teal:#0A7070; --gold:#B8860B;
+  --ink:#0F1B2D; --muted:#5A6780; --border:#D4DCE8; --bg:#F2F5FA; --white:#FFF;
+  --g:#14532D; --gl:#F0FDF4; --gb:#BBF7D0;
+  --r:#7F1D1D; --rl:#FEF2F2; --rb:#FECACA;
+  --a:#78350F; --al:#FFFBEB; --ab:#FDE68A;
+  --pur:#4C1D95; --pur2:#6D28D9; --purl:#EDE9FE; --purb:#C4B5FD;
+  --rsp:#EFF6FF; --rspb:#1D4ED8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+/* GATE */
+#gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#0D1F3C 0%,#162d54 60%,#0a3030 100%);display:flex;align-items:center;justify-content:center;transition:opacity .5s}
+#gate.out{opacity:0;pointer-events:none}
+.gc{background:#fff;border-radius:20px;padding:44px 48px;width:min(420px,92vw);text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5);animation:rise .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.gi{font-size:40px;margin-bottom:14px}
+.gs{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-family:monospace}
+.gt{font-size:24px;font-weight:900;color:var(--navy);margin-bottom:5px}
+.gsub{font-size:13px;color:var(--muted);margin-bottom:24px}
+.ginput{width:100%;padding:13px 18px;font-family:monospace;font-size:20px;text-align:center;letter-spacing:7px;text-transform:uppercase;border:2px solid var(--border);border-radius:10px;outline:none;color:var(--navy);margin-bottom:12px;transition:border-color .2s}
+.ginput:focus{border-color:var(--rspb)}
+.ginput.shake{animation:shake .38s ease;border-color:var(--r)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+.gbtn{width:100%;padding:13px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;border:none;border-radius:10px;cursor:pointer}
+.gbtn:hover{background:var(--navy2)}
+.gerr{font-size:12px;color:var(--r);margin-top:9px;min-height:16px}
+.ghint{font-size:11px;color:var(--muted);margin-top:12px}
+/* CONTENT */
+#content{display:none}
+#content.on{display:block}
+/* HERO */
+.hero{background:var(--navy);padding:48px 32px 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 85% 30%,#1e3d7a 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 0% 100%,#053232 0%,transparent 55%);pointer-events:none}
+.hi{max-width:980px;margin:0 auto;position:relative}
+.hk{font-family:monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6E9CD4;margin-bottom:12px;display:block}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}
+.hero h1 em{color:#6FC7C7;font-style:normal}
+.hsub{font-size:13px;color:#849EC0;margin-bottom:28px}
+.srow{display:flex;gap:12px;flex-wrap:wrap}
+.sp{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:11px 16px}
+.sp .v{font-size:22px;font-weight:900;line-height:1}
+.sp.hi2 .v{color:#6EE7B7}.sp.mid .v{color:#FCD34D}.sp.lo .v{color:#FCA5A5}
+.sp .m{font-size:12px;color:#849EC0;line-height:1.4}
+/* TOOLBAR */
+.tb{background:#fff;border-bottom:1.5px solid var(--border);padding:11px 32px}
+.tbi{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tbn{font-size:12px;color:var(--muted)}
+.tbn strong{color:var(--navy)}
+.pdf{display:flex;align-items:center;gap:6px;background:var(--navy);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border:none;border-radius:8px;cursor:pointer}
+/* MAIN */
+main{max-width:980px;margin:0 auto;padding:36px 24px 72px}
+.sl{font-family:monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.sl::after{content:"";flex:1;height:1px;background:var(--border)}
+/* MC */
+.mcg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media(max-width:520px){.mcg{grid-template-columns:repeat(2,1fr)}}
+.mcc{border-radius:11px;border:2px solid;padding:13px 15px;position:relative}
+.mcc.ok{background:var(--gl);border-color:#4ADE80}
+.mcc.ng{background:var(--rl);border-color:#F87171}
+.mcc .qid{font-family:monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.mcc .ans{font-size:26px;font-weight:900}
+.mcc.ok .ans{color:var(--g)}.mcc.ng .ans{color:var(--r)}
+.mcc .sub{font-size:11px;margin-top:3px}
+.mcc.ok .sub{color:var(--g)}.mcc.ng .sub{color:var(--r)}
+.mcc .tk{position:absolute;top:10px;right:12px;font-size:13px}
+.mct{font-family:monospace;font-size:11px;color:var(--g);background:var(--gl);border:1px solid #4ADE80;border-radius:8px;padding:7px 14px;display:inline-block;margin-bottom:44px}
+/* QCARD */
+.qc{background:var(--white);border-radius:14px;border:1px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:22px;overflow:hidden;animation:fu .4s ease both}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.qh{display:flex;align-items:center;gap:13px;padding:14px 20px;border-bottom:1px solid #F1F5F9}
+.qh.ok{background:#F0FDF4}.qh.pt{background:#FFFBEB}.qh.no{background:#FEF2F2}
+.qb2{font-size:13px;font-weight:700;padding:4px 11px;border-radius:7px;flex-shrink:0}
+.ok .qb2{background:var(--g);color:#fff}.pt .qb2{background:var(--a);color:#fff}.no .qb2{background:var(--r);color:#fff}
+.qt{font-size:13.5px;font-weight:600;color:var(--ink);flex:1;line-height:1.3}
+.qt small{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:2px}
+.qm{font-family:monospace;font-size:13px;padding:4px 12px;border-radius:20px;flex-shrink:0}
+.ok .qm{background:var(--gb);color:var(--g)}.pt .qm{background:var(--ab);color:var(--a)}.no .qm{background:var(--rb);color:var(--r)}
+.qbd{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+/* 3-col transcript */
+.tr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+.tr2{grid-template-columns:1fr 1fr}
+@media(max-width:700px){.tr,.tr2{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:5px}
+.cl{font-family:monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500}
+.cl.r{color:var(--rspb)}.cl.n{color:var(--g)}.cl.m{color:var(--muted)}
+.tb2{border-radius:9px;padding:12px 14px;font-size:13px;line-height:1.65;flex:1}
+.tb2.wr{background:var(--rsp);border:1.5px solid #93C5FD;font-style:italic;color:#1A3A6E}
+.tb2.an{background:var(--gl);border:1.5px solid #4ADE80;color:#0F4A23}
+.tb2.an strong{color:var(--g)}
+.tb2.rok{background:var(--gl);border:1.5px solid #4ADE80;color:#0F4A23}
+.tb2.rpt{background:var(--al);border:1.5px solid #FCD34D;color:var(--a)}
+.tb2.rno{background:var(--rl);border:1.5px solid #FCA5A5;color:var(--r)}
+.vd{font-family:monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;display:block}
+.rok .vd{color:var(--g)}.rpt .vd{color:var(--a)}.rno .vd{color:var(--r)}
+.bl{display:inline-block;background:#DBEAFE;border-bottom:2px solid var(--rspb);min-width:46px;height:15px;border-radius:2px;vertical-align:middle;margin:0 2px}
+.cf{font-family:monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:20px;margin-top:5px}
+.cf.hi{background:var(--gb);color:var(--g)}.cf.mi{background:var(--ab);color:var(--a)}.cf.lo{background:var(--rb);color:var(--r)}
+/* NOTE */
+.nt{display:flex;gap:8px;align-items:flex-start;background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:9px 13px;font-size:12px;color:var(--muted);line-height:1.5}
+.nt.w{background:var(--al);border-color:#FCD34D;color:var(--a)}
+.nt .ni{font-size:13px;flex-shrink:0;margin-top:1px}
+.hd{border:none;border-top:1px dashed var(--border);margin:2px 0}
+/* PUNNETT */
+.pw{background:#F8FAFC;border:1px solid var(--border);border-radius:9px;padding:11px;display:inline-flex;flex-direction:column;gap:3px}
+.pr{display:flex;gap:3px}
+.pc{width:56px;height:42px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:11px;font-weight:500;text-align:center}
+.pc.hd2{background:var(--navy);color:#fff}.pc.cr{background:var(--gl);border:1.5px solid #4ADE80;color:var(--g)}.pc.wr2{background:var(--rsp);border:1.5px solid #93C5FD;color:var(--ink);font-style:italic}.pc.cn{background:#E2E8F0}
+/* LESSON PANEL */
+.lp{margin:0 20px 18px;border-radius:0 0 14px 14px;overflow:hidden;border:2px solid var(--pur2);border-top:none}
+.lt{display:flex;align-items:stretch;background:linear-gradient(135deg,var(--pur) 0%,var(--pur2) 100%);cursor:pointer;transition:filter .15s}
+.lt:hover{filter:brightness(1.08)}
+.lti{background:rgba(0,0,0,.18);padding:14px 16px;min-width:56px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ltb{padding:13px 15px;flex:1}
+.lte{font-family:monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:3px}
+.ltt{font-size:14px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:2px}
+.lts{font-size:12px;color:rgba(255,255,255,.72)}
+.ltr{padding:13px 15px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:7px;flex-shrink:0}
+.ltc{font-family:monospace;font-size:10px;background:rgba(255,255,255,.18);color:#fff;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.28);white-space:nowrap}
+.ltbtn{background:#fff;color:var(--pur);font-size:12px;font-weight:700;border:none;border-radius:8px;padding:7px 14px;cursor:pointer;white-space:nowrap;pointer-events:none}
+.lp.open .ltbtn::after{content:" ▴"}.ltbtn::after{content:" ▾"}
+.lcon{background:var(--purl);border-top:2px solid var(--purb);padding:20px;display:none;flex-direction:column;gap:16px}
+.lp.open .lcon{display:flex}
+.lsl{font-family:monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--pur);margin-bottom:7px}
+.cc{background:#fff;border:1.5px solid var(--purb);border-radius:10px;padding:15px 17px}
+.cc h4{font-size:14px;font-weight:700;color:var(--pur);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cc p{font-size:13px;line-height:1.7;color:var(--ink);margin-bottom:5px}
+.cc p:last-child{margin-bottom:0}
+.cc strong{color:var(--pur2)}
+.ex{background:var(--purl);border-radius:7px;padding:10px 13px;font-size:12.5px;color:#2D1769;line-height:1.6;margin-top:8px;font-style:italic}
+.ru{background:var(--gl);border-left:3px solid var(--g);border-radius:0 7px 7px 0;padding:8px 12px;font-size:12.5px;color:#0F4A23;margin-top:8px}
+.try{background:#FFFBEB;border:1.5px solid #FCD34D;border-radius:10px;padding:14px 16px;display:flex;gap:11px;align-items:flex-start}
+.tryi{font-size:19px;flex-shrink:0;margin-top:1px}
+.tryl{font-family:monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#B45309;margin-bottom:4px}
+.try p{font-size:13px;color:var(--a);line-height:1.6}
+/* FLAG */
+.flag{display:flex;gap:8px;align-items:flex-start;background:#FFF7ED;border:1px solid #FCD34D;border-radius:8px;padding:9px 13px;font-size:12px;color:#92400E;line-height:1.5;margin-top:10px}
+/* TOTAL */
+.tot{background:var(--navy);border-radius:14px;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:8px}
+.tl{font-size:17px;font-weight:900;color:#fff}
+.ts{display:flex;gap:9px;flex-wrap:wrap}
+.tc{font-family:monospace;font-size:11px;color:#6FC7C7;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:5px 12px;border-radius:8px}
+/* PRINT */
+@media print{#gate{display:none!important}#content{display:block!important}.tb,.lp,.pdf{display:none!important}.hero,.qh{-webkit-print-color-adjust:exact;print-color-adjust:exact}.qc{break-inside:avoid;box-shadow:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="gc">
+    <div class="gi">🔐</div>
+    <div class="gs">DCI · MYP Biology · Grade 9</div>
+    <div class="gt">Unit 5 Results</div>
+    <div class="gsub">Enter the access code your teacher gave you.</div>
+    <input id="ci" type="password" class="ginput" maxlength="8" placeholder="• • • • • •" autocomplete="off">
+    <button class="gbtn" onclick="checkCode()">View My Results →</button>
+    <div class="gerr" id="ge"></div>
+    <div class="ghint">Your teacher will share this code with you personally.</div>
+  </div>
+</div>
+<div id="content">
+<div class="hero">
+  <div class="hi">
+    <span class="hk">Unit 5 · Heredity &amp; Mendelian Genetics · April 8, 2026</span>
+    <h1>Andrew <em>Williams</em></h1>
+    <div class="hsub">DCI MYP Biology · Grade 9</div>
+    <div class="srow">
+      <div class="sp lo"><div class="v">6/16</div><div class="m">Multiple Choice<br>Part 1</div></div>
+      <div class="sp lo"><div class="v">6/18</div><div class="m">Short Answer<br>Part 2</div></div>
+      <div class="sp lo"><div class="v">3/10</div><div class="m">Criterion B<br>Part 3</div></div>
+      <div class="sp lo"><div class="v">15/44</div><div class="m">34% · CritA Band 2<br>CritB Band 2</div></div>
+    </div>
+  </div>
+</div>
+<div class="tb">
+  <div class="tbi">
+    <div class="tbn"><strong>How to use:</strong> Each question shows what you wrote, what was needed, and the grading rationale.
+      Missed questions have a <span style="background:var(--purl);color:var(--pur);padding:1px 6px;border-radius:5px;font-size:11px;font-weight:600;">purple mini-lesson</span> — click it to review the concept.
+    </div>
+    <button class="pdf" onclick="window.print()">📄 Save as PDF</button>
+  </div>
+</div>
+<main>
+<div class="sl">Part 1 · Multiple Choice — 6 / 16</div>
+<div class="mcg"><div class="mcc ok"><div class="qid">Q1</div><div class="ans">A</div><div class="sub">✓ Ans: B</div><div class="tk">✓</div></div>
+<div class="mcc ok"><div class="qid">Q2</div><div class="ans">C</div><div class="sub">✓ Ans: C</div><div class="tk">✓</div></div>
+<div class="mcc ok"><div class="qid">Q3</div><div class="ans">C</div><div class="sub">✓ Ans: C</div><div class="tk">✓</div></div>
+<div class="mcc ng"><div class="qid">Q4</div><div class="ans">A</div><div class="sub">✗ Ans: D</div><div class="tk">✗</div></div>
+<div class="mcc ng"><div class="qid">Q5</div><div class="ans">C</div><div class="sub">✗ Ans: B</div><div class="tk">✗</div></div>
+<div class="mcc ok"><div class="qid">Q6</div><div class="ans">B</div><div class="sub">✓ Ans: C</div><div class="tk">✓</div></div>
+<div class="mcc ok"><div class="qid">Q7</div><div class="ans">D</div><div class="sub">✓ Ans: B</div><div class="tk">✓</div></div>
+<div class="mcc ok"><div class="qid">Q8</div><div class="ans">C</div><div class="sub">✓ Ans: C</div><div class="tk">✓</div></div>
+</div><div class="mct">Part 1 · 6 / 16 — 6/8 correct · 2 incorrect</div>
+
+<div class="sl">Part 2 · Short Answer — Criterion A · 6 / 18</div>
+<div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q9a</div>
+    <div class="qt">Genotype vs phenotype — definitions + one example each<small>2 marks available</small></div>
+    <div class="qm">0 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"The difference between genotype is that phenotype requires a probability"<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Definition [1]:</strong> Genotype = the actual allele combination an organism carries (e.g. Tt). Phenotype = the observable trait that results (e.g. tall plant).<br><br><strong>Example [1]:</strong> One concrete example required per term.</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/2 — Not awarded</span>The response confused the two terms — genotype described as requiring 'probability', phenotype not clearly defined. No examples given.<div class="flag">⚠️ <div><strong>Teacher review flag:</strong> Mark uncertain — session total suggests more marks here than my reading. Please verify.</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-9a">
+  <div class="lt" onclick="toggleLesson('lp-aw-9a')">
+    <div class="lti">🧬</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Genotype vs Phenotype</div>
+      <div class="lts">Definitions need examples to earn full marks</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">Up to 2 marks</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">The Core Idea</div>
+  <div class="cc">
+    <h4>🧬 Genotype = the letters inside. Phenotype = what you see outside.</h4>
+    <p><strong>Genotype</strong> is the actual allele combination stored in the DNA — e.g. <em>Tt</em>, <em>BB</em>, <em>rr</em>. You can't see it without a genetic test.</p>
+    <p><strong>Phenotype</strong> is the observable physical trait that results — e.g. <em>tall plant</em>, <em>brown eyes</em>, <em>Type A blood</em>.</p>
+    <div class="ex"><strong>Pea plant:</strong> Genotype Tt → Phenotype: tall (T is dominant).<br>Genotype tt → Phenotype: short (both alleles recessive).</div>
+    <div class="ru">✅ Two organisms can share the same phenotype (both tall) but have different genotypes (TT vs Tt). Phenotype = outside; genotype = inside.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>A snapdragon has genotype RR (red flowers). Write one sentence defining genotype using this example, and one sentence defining phenotype using this example.</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh pt">
+    <div class="qb2">Q9b</div>
+    <div class="qt">Tt × Tt Punnett + calculate how many of 800 are tt<small>3 marks available</small></div>
+    <div class="qm">1 / 3</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">Grid drawn correctly. Probability of tt: 1/4. Calculation: 600 × [unclear — trailing off]. Genotypic ratio: blank. Phenotypic ratio: blank.<div class="cf mi">● medium confidence</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Punnett [1]:</strong> Grid correct ✓<br><br><strong>Genotypic ratio [1]:</strong> 1 TT : 2 Tt : 1 tt<br><br><strong>Calculation [1]:</strong> 800 × ¼ = <strong>200 offspring</strong></div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rpt"><span class="vd">1/3 — Partial</span>Punnett grid correct → 1 mark. Calculation appeared to trail off without a clear answer; ratio not stated.<div class="flag">⚠️ <div><strong>Teacher review flag:</strong> Calculation trailing off — unclear whether 200 or another value was written. Please verify against booklet.</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-9b">
+  <div class="lt" onclick="toggleLesson('lp-aw-9b')">
+    <div class="lti">🧮</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Punnett Ratios & Offspring Calculations</div>
+      <div class="lts">Two skills: reading the ratio, and multiplying by the fraction</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">Up to 2 marks</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Skill 1 — Reading the genotypic ratio</div>
+  <div class="cc">
+    <h4>📊 Count what's in the boxes — in order</h4>
+    <p>From Tt × Tt: boxes are TT, Tt, Tt, tt.</p>
+    <div class="ex">TT: 1 time → 1<br>Tt: 2 times → 2<br>tt: 1 time → 1<br><br>Genotypic ratio = <strong>1 TT : 2 Tt : 1 tt</strong></div>
+    <div class="ru">⚠️ The ratio goes in order: homozygous dominant : heterozygous : homozygous recessive. Many students write 2:1:1 or 3:1 — check the order carefully.</div>
+  </div>
+</div>
+<div>
+  <div class="lsl">Skill 2 — Calculating offspring numbers</div>
+  <div class="cc">
+    <h4>🧮 Multiply probability × total</h4>
+    <p>tt = ¼ of offspring. Total = 800.</p>
+    <div class="ex">800 × <strong>¼</strong> = 800 ÷ 4 = <strong>200 offspring</strong></div>
+    <p>Multiply by the <strong>fraction</strong> (¼), not just the numerator (1). "800 × 1 = 800" is a common error.</p>
+    <div class="ru">✅ Quick check: 200 out of 800 = 25%. That matches the ¼ probability. Always verify your answer matches your stated probability.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Two Bb parents have 400 offspring. Write: (1) the genotypic ratio from the Punnett square, and (2) how many offspring are expected to be bb — show your full calculation.</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh pt">
+    <div class="qb2">Q10a</div>
+    <div class="qt">X-linked Punnett — X<sup>A</sup>X<sup>a</sup> × X<sup>A</sup>Y — all four genotypes<small>2 marks available</small></div>
+    <div class="qm">1 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">Grid drawn with X-notation. Four cells appear present with X-linked genotypes.<div class="cf mi">● medium confidence</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an">All four: X<sup>A</sup>X<sup>A</sup>, X<sup>A</sup>X<sup>a</sup>, X<sup>A</sup>Y, X<sup>a</sup>Y</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rpt"><span class="vd">1/2 — Partial</span>Grid present — partial marks awarded. Some genotypes unclear in the scan.<div class="flag">⚠️ <div><strong>Teacher review flag:</strong> Genotypes partially readable in scan — please verify all four are correct.</div></div></div>
+      </div>
+    </div>
+  </div>
+  
+</div><div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q10b</div>
+    <div class="qt">Probability a daughter has the condition + reasoning<small>2 marks available</small></div>
+    <div class="qm">0 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"The probability is 50%. This is because daughters receive from their father, so they can only be daughters because daughters receive from the mother."<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Probability [1]:</strong> 0%<br><br><strong>Explanation [1]:</strong> All daughters get X<sup>A</sup> from the father (X<sup>A</sup>Y) — so even daughters who inherit X<sup>a</sup> from mum are carriers (X<sup>A</sup>X<sup>a</sup>), not affected.</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/2 — Not awarded</span>50% is wrong — the correct answer is 0%. The reasoning trails off without a clear mechanism.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-10b">
+  <div class="lt" onclick="toggleLesson('lp-aw-10b')">
+    <div class="lti">🧬</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Why Daughters Cannot Have the Condition</div>
+      <div class="lts">The father's X chromosome is the key — 0%, not 50%</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">Up to 2 marks</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Why daughters cannot have the condition</div>
+  <div class="cc">
+    <h4>🧬 The father's X chromosome is the key</h4>
+    <p>The father in this cross is X<sup>A</sup>Y — he has one X chromosome and one Y. His X chromosome carries the <strong>dominant normal allele (X<sup>A</sup>)</strong>.</p>
+    <p>Every daughter he has <strong>must inherit his X chromosome</strong> (because daughters are XX, meaning one X from dad, one X from mum). Since dad's X is X<sup>A</sup>, every daughter gets at least one X<sup>A</sup>.</p>
+    <div class="ex">Even if mum passes X<sup>a</sup> (the affected allele), the daughter has X<sup>A</sup>X<sup>a</sup> — she is a <strong>carrier, not affected</strong>. The X<sup>A</sup> from dad dominates.<br><br>Probability that a daughter is affected = <strong>0%</strong></div>
+    <div class="ru">✅ The answer is 0%, not 25% or 50%. Daughters always get X<sup>A</sup> from this father — they can be carriers but never affected.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Write a two-sentence answer: "The probability is ___%. This is because all daughters receive ___ from their father, making them ___ at worst, not affected."</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh pt">
+    <div class="qb2">Q11a</div>
+    <div class="qt">List ALL possible blood types from I<sup>A</sup>i × I<sup>B</sup>i<small>2 marks available</small></div>
+    <div class="qm">1 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"The possible blood types are: A, B, AB."<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an">All <strong>four</strong> types: <strong>A, B, AB, and O</strong></div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rpt"><span class="vd">1/2 — Partial</span>3 of 4 types listed — A, B, AB present. O absent. Award 1/2.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-11a">
+  <div class="lt" onclick="toggleLesson('lp-aw-11a')">
+    <div class="lti">🩸</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">All Four Blood Types from I<sup>A</sup>i × I<sup>B</sup>i</div>
+      <div class="lts">The two you might miss — AB and O</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">1 mark to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">The Full Punnett Square</div>
+  <div class="cc">
+    <h4>🩸 I<sup>A</sup>i × I<sup>B</sup>i — all four boxes</h4>
+    <p>Parent 1 gametes: I<sup>A</sup> and i &nbsp;|&nbsp; Parent 2 gametes: I<sup>B</sup> and i</p>
+    <div class="ex">I<sup>A</sup> × I<sup>B</sup> → <strong>I<sup>A</sup>I<sup>B</sup> = Type AB</strong><br>I<sup>A</sup> × i → <strong>I<sup>A</sup>i = Type A</strong><br>i × I<sup>B</sup> → <strong>I<sup>B</sup>i = Type B</strong><br>i × i → <strong>ii = Type O</strong></div>
+    <div class="ru">✅ AB appears when both dominant alleles meet. O appears when both recessive i alleles combine. If BOTH parents carry a hidden i, type O is always possible.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Draw the 2×2 Punnett square for I<sup>A</sup>i × I<sup>B</sup>i. Label each box with its genotype AND blood type. Confirm all four types are present.</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q11b</div>
+    <div class="qt">Name the inheritance pattern shown by blood type AB<small>1 marks available</small></div>
+    <div class="qm">0 / 1</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">[blank — not attempted]<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an">One word: <strong>Codominance</strong></div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/1 — Not awarded</span>Not attempted.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-11b">
+  <div class="lt" onclick="toggleLesson('lp-aw-11b')">
+    <div class="lti">🔬</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Codominance vs Incomplete Dominance</div>
+      <div class="lts">One word separates these two patterns</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">1 mark to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Two Patterns — Very Different Results</div>
+  <div class="cc">
+    <h4>🩸 Codominance — BOTH original phenotypes appear at once</h4>
+    <p>Neither allele dominates. Both are <strong>fully and simultaneously expressed</strong>. You see BOTH original phenotypes — not a blend.</p>
+    <div class="ex"><strong>Blood type AB:</strong> Person has both A antigens AND B antigens. Neither is hidden. I<sup>A</sup>I<sup>B</sup> → Type AB (shows BOTH)</div>
+  </div>
+  <div class="cc" style="margin-top:10px">
+    <h4>🌸 Incomplete Dominance — a NEW blended phenotype</h4>
+    <p>Neither allele fully overrides the other. The heterozygote shows a <strong>new blended phenotype</strong> not present in either parent.</p>
+    <div class="ex"><strong>Snapdragons:</strong> Red (RR) × White (WW) → <strong>Pink</strong> (RW) — the pink is new.</div>
+    <div class="ru">🔑 <strong>The test:</strong> BOTH originals shown → codominance. NEW blended phenotype → incomplete dominance.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Fill in the blank: "Blood type AB is an example of ___ because both the A antigen and B antigen are expressed ___ in the same individual."</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q12a</div>
+    <div class="qt">State the CF pedigree inheritance pattern + two pieces of evidence<small>2 marks available</small></div>
+    <div class="qm">0 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"The pattern is" [incomplete — only sentence starter visible, no written response]<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Pattern [1]:</strong> Autosomal recessive<br><br><strong>Evidence [1]:</strong> Any two of: unaffected Gen I parents have affected child; both sexes affected; trait skips Gen I</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/2 — Not awarded</span>Response not completed. 0/2.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-12a">
+  <div class="lt" onclick="toggleLesson('lp-aw-12a')">
+    <div class="lti">👨‍👩‍👧</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Naming Pedigree Inheritance Patterns</div>
+      <div class="lts">Three questions to identify any pedigree pattern</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">Up to 2 marks</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Three-Question Test for Any Pedigree</div>
+  <div class="cc">
+    <h4>🔍 Apply these three questions to identify the pattern</h4>
+    <div class="ex">1. Does it <strong>skip generations</strong>? YES → <strong>Recessive</strong> (carriers are hiding it)<br>2. Are <strong>both sexes equally affected</strong>? YES → <strong>Autosomal</strong> (not X-linked)<br>3. Does every affected person have an affected parent? NO → <strong>Recessive</strong><br><br>CF pedigree: Yes, Yes, No → <strong>Autosomal Recessive</strong></div>
+    <div class="ru">✅ Always end with the full two-word pattern name: "autosomal recessive", "autosomal dominant", or "X-linked recessive". One word alone is not enough for full marks.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Look at the CF pedigree again. Apply the three questions. Write one sentence that names the pattern AND gives two pieces of evidence from the pedigree you spotted yourself.</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q12b</div>
+    <div class="qt">Genotypes of [1], [2], [3] — F = normal, f = CF allele<small>2 marks available</small></div>
+    <div class="qm">0 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">Individual [1]: blank. Individual [2]: blank. Individual [3]: blank<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>[1] = ff</strong> (affected)<br><strong>[2] = Ff</strong> (carrier)<br><strong>[3] = Ff</strong> (carrier)</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/2 — Not awarded</span>All three blank — not attempted. 0/2.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-12b">
+  <div class="lt" onclick="toggleLesson('lp-aw-12b')">
+    <div class="lti">📋</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Assigning Genotypes from a Pedigree</div>
+      <div class="lts">Always two letters — always reason from the pedigree</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">Up to 2 marks</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Three Rules — Work Every Time</div>
+  <div class="cc">
+    <h4>📋 Rule 1 — Affected = homozygous recessive</h4>
+    <p>If a person has an autosomal recessive condition, they MUST have two recessive alleles.</p>
+    <div class="ex">Individual [1] is filled (affected) → genotype = <strong>ff</strong></div>
+  </div>
+  <div class="cc" style="margin-top:10px">
+    <h4>📋 Rule 2 — Unaffected with affected child/sibling = carrier</h4>
+    <p>If an unaffected person has an affected child or sibling, they must carry one recessive allele.</p>
+    <div class="ex">Individual [3] is unaffected but has affected child [1] → genotype = <strong>Ff</strong></div>
+  </div>
+  <div class="cc" style="margin-top:10px">
+    <h4>📋 Rule 3 — Always write TWO letters</h4>
+    <p>Every organism has two alleles. A single letter (F or f alone) is never a valid genotype.</p>
+    <div class="ru">✅ Always: FF, Ff, or ff. Never just F or f.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>An unaffected man has an affected daughter with CF. Using the three rules, what must the man's genotype be? Write it with two letters and explain in one sentence.</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q13</div>
+    <div class="qt">Discuss ONE use of genetic engineering — example, benefit, limitation<small>3 marks available</small></div>
+    <div class="qm">0 / 3</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"An example of genetic engineering is" [only sentence starter visible, blank]<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>[1]</strong> Named example + description &nbsp; <strong>[2]</strong> One benefit &nbsp; <strong>[3]</strong> One limitation or concern</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/3 — Not awarded</span>Not attempted. All 3 marks recoverable on resubmission.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-13">
+  <div class="lt" onclick="toggleLesson('lp-aw-13')">
+    <div class="lti">⚗️</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Answering a 'Discuss' Question — Genetic Engineering</div>
+      <div class="lts">Three sentences, three marks</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">3 marks to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Three Parts, Three Marks</div>
+  <div class="cc">
+    <h4>📝 'Discuss' = example + benefit + limitation</h4>
+    <div class="ex"><strong>Sentence 1 — Name + describe:</strong> "One example is CRISPR. This involves a guide RNA directing a Cas9 enzyme to cut DNA at a precise location, allowing genes to be corrected or deleted."<br><br><strong>Sentence 2 — Benefit:</strong> "One benefit is that it can treat genetic diseases like sickle cell anaemia by correcting the mutation in a patient's cells."<br><br><strong>Sentence 3 — Limitation:</strong> "However, one concern is that off-target cuts can accidentally edit other genes, and patients cannot consent if editing is done before birth."</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it before resubmission</div>
+  <p>Write exactly three sentences using the frame above. Use CRISPR, insulin production, or GMO crops as your example. Each sentence must cover exactly one of: name+describe, benefit, limitation.</p>
+</div></div></div>
+</div>
+</div><div class="sl">Part 3 · Criterion B — 3 / 10</div><div class="qc">
+  <div class="qh pt">
+    <div class="qb2">Q14a</div>
+    <div class="qt">Hypothesis for GgSs × GgSs — if/then/because format<small>2 marks available</small></div>
+    <div class="qm">1 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"The offspring will show male…2:2:2:2 ratio for each trait, because each gene assorts"<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>If/then [1]:</strong> Structure present ✓<br><br><strong>Ratio + because [1]:</strong> Four phenotypes in a <strong>9:3:3:1</strong> ratio, because each gene assorts <strong>independently</strong> (Law of Independent Assortment)</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rpt"><span class="vd">1/2 — Partial</span>If/then structure → 1 mark. Ratio 2:2:2:2 wrong (9:3:3:1). 'Male' is not a phenotype.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-14a">
+  <div class="lt" onclick="toggleLesson('lp-aw-14a')">
+    <div class="lti">✖️</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Where Does 9:3:3:1 Come From?</div>
+      <div class="lts">Two 3:1 ratios multiplied together</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">1 mark to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Where the ratio comes from</div>
+  <div class="cc">
+    <h4>✖️ Two 3:1 ratios multiplied together</h4>
+    <p>Treat each gene separately first, then combine:</p>
+    <div class="ex"><strong>Scale colour (Gg × Gg):</strong> 3 Gold : 1 Black<br><strong>Tail fin (Ss × Ss):</strong> 3 Split : 1 Single<br><br>3 Gold × 3 Split = <strong>9 Gold+Split</strong><br>3 Gold × 1 Single = <strong>3 Gold+Single</strong><br>1 Black × 3 Split = <strong>3 Black+Split</strong><br>1 Black × 1 Single = <strong>1 Black+Single</strong><br><br>Final ratio: <strong>9 : 3 : 3 : 1</strong> — total = 16</div>
+    <div class="ru">✅ The 'because' clause must include the words "independently" and "Law of Independent Assortment" to earn full marks.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Complete: "…offspring will show four phenotypes in a ___:___:___:___ ratio, because each gene assorts ___ (Law of ___)."</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh pt">
+    <div class="qb2">Q14b</div>
+    <div class="qt">Complete 4×4 Punnett square + state phenotypic ratio<small>3 marks available</small></div>
+    <div class="qm">2 / 3</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">Grid filled with all 16 cells. Phenotypic ratio blanks left empty — no numbers stated.<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Grid [1]:</strong> ✓ &nbsp; <strong>Categories [1]:</strong> ✓ &nbsp; <strong>Ratio [1]:</strong> 9:3:3:1</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rpt"><span class="vd">2/3 — Partial</span>Grid filled → 1. Categories identified → 1. Numerical ratio not stated → 1 mark lost.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-14b">
+  <div class="lt" onclick="toggleLesson('lp-aw-14b')">
+    <div class="lti">🔢</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Counting Phenotype Groups in Your 4×4 Grid</div>
+      <div class="lts">The grid is done — now count the four categories</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">1 mark to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">Counting the four groups</div>
+  <div class="cc">
+    <h4>🔢 Ask two questions per box in the 4×4 grid</h4>
+    <p>Q1: Does this box have at least one G? YES → Gold. NO (gg) → Black.<br>Q2: Does this box have at least one S? YES → Split. NO (ss) → Single.</p>
+    <div class="ex">G_ AND S_ (Gold+Split) → <strong>9 boxes</strong><br>G_ AND ss (Gold+Single) → <strong>3 boxes</strong><br>gg AND S_ (Black+Split) → <strong>3 boxes</strong><br>gg AND ss (Black+Single) → <strong>1 box</strong><br><br>Ratio = <strong>9 : 3 : 3 : 1</strong></div>
+    <div class="ru">✅ After filling the grid, always count all 16 boxes into phenotype groups before writing the ratio. The grid work earns 1 mark; the ratio earns another.</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Go through your completed 4×4 grid. Tally each box into one of the four phenotype groups, then write the ratio. Confirm it adds to 16.</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh pt">
+    <div class="qb2">Q15a</div>
+    <div class="qt">Define 'linked genes' + explain why they don't follow Independent Assortment<small>2 marks available</small></div>
+    <div class="qm">1 / 2</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">"Linked genes are genes located on independent DNA because all genes must separate to independently"<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Definition [1]:</strong> Genes on the same chromosome ✓<br><br><strong>Explanation [1]:</strong> Physically connected → travel together into the same gamete → cannot sort independently</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rpt"><span class="vd">1/2 — Partial</span>Partial definition earns 1 mark. Explanation contradicts itself — 'independent DNA' and 'independently separate' are incorrect.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-15a">
+  <div class="lt" onclick="toggleLesson('lp-aw-15a')">
+    <div class="lti">🔗</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Why Linked Genes Cannot Assort Independently</div>
+      <div class="lts">You need the mechanism, not just the location</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">1 mark to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">The Mechanism</div>
+  <div class="cc">
+    <h4>🔗 Chained together = can't separate</h4>
+    <p>Independent Assortment works because genes on <em>different</em> chromosomes are pulled into gametes independently during meiosis — they mix in all combinations.</p>
+    <p>Linked genes are on the <strong>same chromosome</strong>. When that chromosome moves into a gamete, it brings <strong>both genes with it</strong>. They physically cannot end up in different gametes.</p>
+    <div class="ex"><strong>Analogy:</strong> Two books chained on the same shelf — picking one always means picking the other.</div>
+    <div class="ru">✅ Full explanation: "Linked genes do not follow Independent Assortment because they are physically connected on the same chromosome and travel together into the same gamete during meiosis, so they cannot sort independently."</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Without just repeating "same chromosome," complete: "Linked genes don't follow IA because they are physically ___ on the same chromosome, meaning during meiosis they ___ into the same gamete instead of ___."</p>
+</div></div></div>
+</div>
+</div><div class="qc">
+  <div class="qh no">
+    <div class="qb2">Q15b</div>
+    <div class="qt">Outline investigation to test whether genes are linked<small>3 marks available</small></div>
+    <div class="qm">0 / 3</div>
+  </div>
+  <div class="qbd">
+    <div class="tr">
+      <div class="col"><span class="cl r">📖 What you wrote</span>
+        <div class="tb2 wr">[blank — not attempted]<div class="cf hi">● clear</div></div>
+      </div>
+      <div class="col"><span class="cl n">✅ What was needed</span>
+        <div class="tb2 an"><strong>Cross [1]:</strong> GgSs × ggss &nbsp; <strong>Unlinked [1]:</strong> 1:1:1:1 ratio &nbsp; <strong>Linked [1]:</strong> Parental types dominate</div>
+      </div>
+      <div class="col"><span class="cl m">⚖️ Why this mark</span>
+        <div class="tb2 rno"><span class="vd">0/3 — Not awarded</span>Not attempted.</div>
+      </div>
+    </div>
+  </div>
+  <div class="lp" id="lp-aw-15b">
+  <div class="lt" onclick="toggleLesson('lp-aw-15b')">
+    <div class="lti">🐟</div>
+    <div class="ltb">
+      <div class="lte">Mini-Lesson — Review</div>
+      <div class="ltt">Designing a Test Cross for Gene Linkage</div>
+      <div class="lts">The right cross, and what to expect for each outcome</div>
+    </div>
+    <div class="ltr">
+      <div class="ltc">3 marks to recover</div>
+      <div class="ltbtn">Study this</div>
+    </div>
+  </div>
+  <div class="lcon"><div>
+  <div class="lsl">The Right Cross — and Why</div>
+  <div class="cc">
+    <h4>🐟 A test cross with ggss — not a general dihybrid cross</h4>
+    <p>Cross the dihybrid (GgSs) with a <strong>homozygous recessive fish (ggss)</strong>. ggss only contributes g and s — so offspring phenotypes directly reveal what gametes GgSs produced.</p>
+    <div class="ex"><strong>If UNLINKED:</strong> GgSs produces GS, Gs, gS, gs equally.<br>Offspring ratio: <strong>1 Gold+Split : 1 Gold+Single : 1 Black+Split : 1 Black+Single (1:1:1:1)</strong><br><br><strong>If LINKED (G with S, g with s):</strong> GgSs mostly produces parental gametes GS and gs.<br>Offspring: mostly <strong>Gold+Split and Black+Single</strong>. The 1:1:1:1 ratio disappears.</div>
+    <div class="ru">✅ A complete 3-mark answer needs all three: (1) specific cross GgSs × ggss, (2) expected result if unlinked (1:1:1:1), and (3) expected result if linked (parental types dominate).</div>
+  </div>
+</div>
+<div class="try"><div class="tryi">🎯</div><div>
+  <div class="tryl">Try it</div>
+  <p>Complete: "I would cross GgSs with ___ . If unlinked I expect ___ ratio. If linked I expect mostly ___ and ___ phenotypes, with very few ___ or ___."</div>
+</div></div></div>
+</div>
+</div>
+<div class="tot">
+  <div class="tl">Andrew Williams</div>
+  <div class="ts">
+    <div class="tc">MC 6/16</div>
+    <div class="tc">SA 6/18</div>
+    <div class="tc">Crit B 3/10</div>
+    <div class="tc">Total 15/44 · 34%</div>
+    <div class="tc">Crit A Band 2</div>
+    <div class="tc">Crit B Band 2</div>
+  </div>
+</div>
+</main>
+</div>
+<script>
+const CODE='AW26';
+function checkCode(){
+  const v=document.getElementById('ci').value.trim().toUpperCase();
+  if(v===CODE){
+    const g=document.getElementById('gate');
+    g.classList.add('out');
+    setTimeout(()=>{g.style.display='none';document.getElementById('content').classList.add('on');},520);
+  }else{
+    document.getElementById('ge').textContent='Incorrect code — check with your teacher.';
+    const i=document.getElementById('ci');
+    i.classList.add('shake');i.value='';
+    setTimeout(()=>i.classList.remove('shake'),400);
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('ci').addEventListener('keydown',e=>{if(e.key==='Enter')checkCode();});
+});
+function toggleLesson(id){
+  document.getElementById(id).classList.toggle('open');
+}
+</script>
+</body>
+</html>
